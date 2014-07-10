@@ -1,0 +1,11 @@
+.classpath
+.project
+.settings
+test-output/
+
+# Project Files #
+*.idea/
+*.iml
+
+# tmp files
+*~
