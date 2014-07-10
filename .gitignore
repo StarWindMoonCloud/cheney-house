@@ -3,6 +3,7 @@
 .settings
 test-output/
 node_modules/
+.*
 
 # Project Files #
 *.idea/
