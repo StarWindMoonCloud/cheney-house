@@ -1,0 +1,37 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 4-5th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				Put plan on web: DONE</li>
+			<li>
+				Cracking the coding interview - 1.5 string compression: DONE
+				<ul>
+					Points of attention
+					<li>
+						determine String null in java: if (str == null)</li>
+					<li>
+						char initialization: first of the string</li>
+					<li>
+						better to move &quot;if (i == 0)&quot; out of the loop</li>
+				</ul>
+			</li>
+			<li>
+				leetcode - Set Matrix Zeroes: DONE
+				<ul>
+					My solution
+					<li>
+						Use row_zero and col_zero to locate where zeros need to be set</li>
+					<li>
+						Cost: Time O(mn), Space O(m+n)</li>
+				</ul>
+			</li>
+			<li>
+				<a href="http://www.w3schools.com/html">w3c shool html</a> (Basic: to HTML HEAD) : DONE</li>
+		</ul>
+	</body>
+</html>
+

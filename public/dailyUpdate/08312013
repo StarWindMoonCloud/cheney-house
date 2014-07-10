@@ -1,0 +1,96 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 31th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				Plan of go home</li>
+			<li>
+				Internet at home</li>
+			<li>
+				leetcode 1-2 problems
+				<ol>
+					<li>
+						Subsets
+						<ul>
+							<li>
+								Note
+								<pre>
+Questions
+1. Original set sorted?
+2. number of subsets
+3. how to represent empty set?
+
+2^n
+
+1. sort
+2. (n, 0), (n, 1), (n, 2)
+
+recursively
+f(a1, a2, a3, a4, ..., an) = f(a1, a2, a3,..., a(n-1)) + sort(a1, a2, ..., an)
+sort(an, a2, a3, ..., a(n-1))
+sort(a1, an, a3, ..., a(n-1))
+sort(a1, a2, an, ..., a(n-1))
++ ...
+sort(a1, a2, a3, ..., a(n-2), an)
++an
+
+
+termination condition: size==0</pre>
+							</li>
+							<li>
+								Testing
+								<pre>
+1. empty
+2. one element
+3. normal
+a. ordered
+b. not ordered </pre>
+							</li>
+							<li>
+								Points of attention
+								<ul>
+									<li>
+										only one empty set should be kept</li>
+									<li>
+										do not forget the subset with the last element only</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Subsets II
+						<ul>
+							<li>
+								Note
+								<pre>
+1. start with empty subset
+2. sort
+3. for i=0,1,2,...,size-1
+a. copy pervious subsets
+b. insert element i to all the previous subsets
+</pre>
+							</li>
+							<li>
+								Points of attention
+								<ul>
+									<li>
+										For duplicated elements, only need to append to the ones whose last element is equal to S[i]</li>
+									<li>
+										For duplicated elements, the starting point need to be carefully chosen</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ol>
+			</li>
+			<li>
+				Start Javascript learning: finished <a href="http://www.w3schools.com/js/">JS Tutorial</a></li>
+			<li>
+				Company learning: start Amazon</li>
+		</ul>
+	</body>
+</html>
+

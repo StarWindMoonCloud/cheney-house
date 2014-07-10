@@ -1,0 +1,33 @@
+<!DOCUMENTTYPE html>
+<html>
+        <head>
+                <title>Othello Minmax Algorithm Implementation</title>
+        </head>
+        <body>
+                <ul>
+                        <li>
+<pre>
+1. computeScore(board, depth, player, step) 
+2. placeStep(board, step.row, step.col, 1)
+3. updateTable(board)
+computeScore(board, depth, player, step) is done recursively
+a. if (depth == 0) return evaluate(board);
+b. for each valid step, place step
+c. computeScore(board, depth - 1, 1 - player, stepSub)
+d. update min/max score
+e. revert back table
+f. return scoreMax/scoreMin
+
+
+placeStep: change board only
+updateTable: change table based on board value
+
+Step out display table and table for score                                                                                              
+Add Mode button, the onclick function changed the mode
+
+</pre>
+                                </li>
+                </ul>
+                </body>
+</html>
+

@@ -1,0 +1,136 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Learning Plan for US 2014</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Programming
+				<ul>
+					<li>
+						coding
+						<ul>
+							<li>
+								leetcode: 5/wk</li>
+						</ul>
+					</li>
+					<li>
+						design
+						<ul>
+							<li>
+								question: 2/wk</li>
+							<li>
+								blog, etc</li>
+						</ul>
+					</li>
+					<li>
+						book(Aug-Sep)
+						<ul>
+							<li>
+								Cracking the coding interview</li>
+							<li>
+								Introduction to algorithms</li>
+							<li>
+								The Algorithm Design Manual</li>
+							<li>
+								Concurrent Programming in Java</li>
+						</ul>
+					</li>
+					<li>
+						<a href="realInterviewQ" target="_blank">Real Interview Question/Experience</a></li>
+				</ul>
+			</li>
+			<li>
+				paper: 1/2wk (Map Reduce, BigTable，Google File system)</li>
+			<li>
+				company learning: 1/2wk</li>
+			<li>
+				web technology <a href="http://www.w3schools.com" target="_blank">w3c</a>
+				<ul>
+					<li>
+						html/html5: 2wk</li>
+					<li>
+						php/web sevices: 2wk</li>
+					<li>
+						web building/js: 3wk</li>
+				</ul>
+			</li>
+			<li>
+				Open source/blogs <a href="https://blog.twitter.com/"> </a>
+				<ul>
+					<li>
+						<a href="https://dev.twitter.com/opensource">Twitter Open Source</a>, <a href="https://blog.twitter.com/">Twitter Blogs</a></li>
+					<li>
+						<a href="https://developers.facebook.com/opensource/">Facebook Open Source</a>, <a href="http://newsroom.fb.com/">Facebook newsroom</li>
+					<li> Collections
+                        <ol>
+						    <a href="http://highscalability.com/blog/2013/7/8/the-architecture-twitter-uses-to-deal-with-150m-active-users.html">The Architecture Twitter Uses To Deal With 150M Active Users, 300K QPS, A 22 MB/S Firehose, And Send Tweets In Under 5 Seconds</a>
+                        </ol>
+				</ul>
+			<li>
+				<a href="https://blog.twitter.com/"> Personal real project </a><a href="https://dev.twitter.com/opensource"> </a>
+				<ul>
+					<li>
+						Starting date: Jul 28, 2013</li>
+					<li>
+						<a href="https://dev.twitter.com/opensource"> </a><a href="https://dev.twitter.com/opensource"> </a><a href="http://aws.amazon.com/ec2/" target="_blank">amazon ec2</a></li>
+					<li>
+						<a href="https://console.aws.amazon.com/ec2/" target="_blank">console</a></li>
+					<li>
+						<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide" target="_blank">guide</a></li>
+					<li>
+						<a href="https://forums.aws.amazon.com/forum.jspa?forumID=30" target="_blank">forum</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/dailyUpdateInfo" target="_blank">Daily/weekly update</a></li>
+			<li>
+				Q&amp;A</li>
+			<li>
+				Userful material/link
+				<ul>
+					<li>
+						<a href="http://www.amoduo.com/tools/boards/view.php?id=1001252" target="_blank">在美国找工作系列：CS 专业找工作经验资料精华大全 </a></li>
+					<li>
+						<a href="http://leetcode.com/onlinejudge" target="_blank">leetcode onlinejudge</a></li>
+				</ul>
+			</li>
+			<li>
+				Miscellaneous
+				<ul>
+					<li>
+						Add certificates to resume</li>
+					<li>
+						<a href="http://mitbbs.com/">daily mitbbs</a></li>
+					<li>
+						Problem solving methodology
+						<ol>
+							<li>
+								Start with (key) questions</li>
+							<li>
+								Write down test cases</li>
+							<li>
+								Solution part
+                                <ul>
+							<li>
+								Giving out my thinking</li>
+							<li>
+								Write down general steps</li>
+							<li>
+								Start from naive solution</li>
+							<li>
+								How to optimize time and space?</li>
+							<li>
+								Code according to the above framework</li>
+                                </ul>
+							<li>
+								Manually testing, error correction and enhancement </li>
+						</ol>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

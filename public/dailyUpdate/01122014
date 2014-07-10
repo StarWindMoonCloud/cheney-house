@@ -1,0 +1,52 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Jan 12, 2014</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				3Sum
+						<pre>
+Questions: duplicate triplets, what does it mean, in terms of value or index?
+1. index -> ok
+2. value -> 
+
+Test cases
+1. array with less than 3 elements
+2. no such case
+3. multiple triplets
+
+
+vector<vector<int> > 3Sum(vector<int> &num) {
+    
+}
+
+Solution:
+via sort
+1. sort
+2. i, j, k
+fix i, find a[i] + a[k] = -a[i]
+
+duplicated: in terms of value
+need skip if value is equal to previous one
+
+Points of attention:
+1. equal still need to continue (i++)
+</pre>
+			</li>
+			</li> 4Sum
+<pre>
+Test cases
+1. less than 4
+2. no answer
+3. more answers
+
+naive method
+sort + 4 loops
+</pre>
+			<li>
+		</ol>
+	</body>
+</html>
+

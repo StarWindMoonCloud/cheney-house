@@ -1,0 +1,82 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Sep 2nd, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				leetcode Binary Tree Inorder Traversal
+				<ul>
+					<li>
+						Note
+						<pre>
+1. Recursively
+a. if empty return
+b. inorderTraversal(node-&gt;left)
+visit(node)
+inorderTraversal(node-&gt;right)
+
+2. nonRecursive
+a. while(node) {
+s.push(node);
+node=node-&gt;left
+}
+
+b. while(!s.empty()) 
+pop()
+visit()
+if(node-&gt;right) push node-&gt;right; node=node-&gt;right
+while(node) {
+s.push(node);
+node=node-&gt;left
+}</pre>
+					</li>
+					<li>
+						Testing
+						<pre>
+1. empty tree
+2. tree with one node
+3. no left/right chid tree
+{1,2,#,3,#}
+{1,#,2,#,3}
+4. normal tree
+{1,#,2,3}
+{1,2,3,#,#,4,#,#,5}
+</pre>
+					</li>
+					<li>
+						Points of attention
+						<ul>
+							<li>
+								How to be graceful
+								<pre>
+From:
+if(node-&gt;right) {
+    node = node-&gt;right;
+    s.push(node);
+    while(node) {
+        node = node-&gt;left;
+        if(node) {
+            s.push(node);
+        }
+    }
+}
+To:
+node = node-&gt;right;
+while(node) {
+    s.push(node);
+    node = node-&gt;left;
+}
+</pre>
+							</li>
+							<li>
+								Do not push empty node pointer to stack</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

@@ -1,0 +1,58 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 11, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode refinement
+				<ul>
+					<li>   Remove Nth Node From End of List  
+						<pre>
+1. count the len
+2. remove len - N 
+3. need to record the previous pointer as well
+
+Another way: two pointers
+</pre>
+					</li>
+					<li>   Merge k Sorted Lists: ListNode *mergeKLists(vector<ListNode *> &lists)
+						<pre>
+HeapSort
+1. Treat it lists as a heap 
+2. merge on the original lists
+3. when one list is empty, reduce heapSize
+
+Steps:
+1. Build Heap
+2. while (heapSize > 0) 
+a. put the top element into mergedList (switch it with the last element first)
+b. put the next element of the list as a replacement (if no more left reduce heapSize)
+c. heapMinify
+
+How to make code cleaner: use existing stl funciton
+
+Points of attention
+1. define class comp outside Solution class (need to be public)
+2. need remove empty list first before making heap
+while(it != lists.end()) {
+    if(*it == NULL) lists.erase(it);
+    else ++it;
+}
+3. minHeap, pay attention to comp
+4. how to define comp function
+public:
+    bool operator()(const ListNode *node1, const ListNode *node2) const{
+        return (node1->val < node2->val);
+    }
+ };
+5. pop_heap(), push_heap() won't change the lists size
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

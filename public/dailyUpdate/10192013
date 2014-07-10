@@ -1,0 +1,46 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 19, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				review
+				<ul>
+					<li>
+						daily update 50%
+						<ul>
+							<li>
+								CC 3.7 (animal queue): C++ version how (no instanceof)</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				game
+				<ul>
+					<li>
+						Add game rules DONE</li>
+					<li>
+						Adopt good ideas from friends (NOT STATRED)</li>
+					<li>
+						Smarter evaluation function (still bug)</li>
+				</ul>
+			</li>
+			<li>
+				Introduction to algorithm (DP) 50%</li>
+			<li>
+				CC150 (Thread safe) NOT STARTED</li>
+			<li>
+				Startup engineering NOT STARTED</li>
+			<li>
+				Backup website content NOT STARTED</li>
+			<li>
+				Local build and debug NOT STARTED</li>
+			<li>
+				Seek more referrals NOT STARTED</li>
+		</ol>
+	</body>
+</html>
+

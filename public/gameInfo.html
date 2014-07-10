@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Game Info</title>
+		<link rel="stylesheet" href="game/othello/gameStyle.css">
+		<style type="text/css">
+/* reset5 © 2011 opensource.736cs.com MIT  https://reset5.googlecode.com/hg/reset.min.css */
+/*
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,caption,tbody,tfoot,thead,article,aside,audio,canvas,details,figcaption,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,summary,time,video{border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0;}body{line-height:1;}article,aside,dialog,figure,footer,header,hgroup,nav,section,blockquote{display:block;}nav ul{list-style:none;}ol{list-style:decimal;}ul{list-style:disc;}ul ul{list-style:circle;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{content:none;}ins{text-decoration:underline;}del{text-decoration:line-through;}mark{background:none;}abbr[title],dfn[title]{border-bottom:1px dotted #000;cursor:help;}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}input[type=submit],input[type=button],button{margin:0!important;padding:0!important;}input,select,a img{vertical-align:middle;}
+*/
+
+</style>
+<script src="game/othello/game.js"></script>
+</head>
+	<body>
+		<ul>
+			<li>
+				<button onclick="initTable()" type="button">New Game</button></li>
+			<li>
+				<button onclick="displayRule()" type="button">Rules</button></li>
+			<li>
+				<select id="turnSelection" onchange="changeTurn()" ><option value="Player">Player</option><option value="Computer">Computer</option></select>First</li>
+			<li>
+				<select id="tableSizeSelection" onchange="adjustTableSize()" ><option value="small">Small</option><option selected value="medium">Medium</option><option value="large">Large</option></select>Size</li>
+			<li>
+				<select id="gameModeSelection" onchange="adjustGameMode()" ><option value="easy">Easy</option><option selected value="medium">Medium</option><option value="hard">Hard</option></select>Mode</li>
+			<li id="playerTurn"><img src="game/othello/black.gif">
+				Turn</li>
+		</ul>
+		<ol>
+			<li>
+				<table border="1" id="gameBoard"> 
+				</table>
+			</li>
+			<li>
+				<pre id="rule">
+				</pre>
+			</li>
+		<ol>
+	</body>
+</html>
+

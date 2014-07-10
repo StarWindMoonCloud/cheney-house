@@ -1,0 +1,163 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 31, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Distinct Subsequences
+						<pre>
+Testcases
+1. empty string
+2. not a subsequence
+ABC
+D
+3. several choices
+
+naive method
+
+isSubsequence(string s, string t)
+two pointers (i, j)
+if s[i] == s[j] i++, j++
+else i++
+if j == t.len true
+
+f(i, j) = numDistinct(s[0-i], t[0-j])
+s[0-i]: s[0 to i]
+t[0-j]: t[0 to j]
+f(i+1, j+1) = numDistinct(s[0-(i+1)], t[0-(j+1)])
+if (s[(i+1)] != t[j+1]) f(i,j+1)
+else f(i,j) + f(i, j+1)
+
+vector<vector<int> > m(lenS+1, vector<int>(lenT+1, 1));
+to store the result
+
+Further refinement
+two rows instead of matrix
+</pre>
+			</li>
+			<li>
+            Pascal's Triangle (II)
+<pre>
+use vPre instead of res.back()
+
+O(k)
+[1,5,10,10,5,1]  5
+(n,k)
+n: row
+k: 0-n
+(n, k) = (n, k-1) * (n-k+1)/k
+
+Points of attention
+1. vCur should be cleared after assigned to vPre
+vPre.clear();
+vPre = vCur;
+vCur.clear();
+2. return vPre since vCur is cleared
+3. value *= (rowIndex - k + 1)/k; is not equal to "value *= (rowIndex - k + 1)/k;" when the right part is less than one (2 *= 1/2)
+4. overflow? how?
+
+</pre>
+			</li>
+			<li>
+                Best Time to Buy and Sell Stock (maxProfit*.cpp)
+<pre>
+Testcase
+1. one element
+2. two elements
+3. more
+
+Idea: find pair that has most gap
+(i,j): i < j
+
+Naive method
+compute all pairs (i, j)
+gap[i][j], find the one with most gap
+
+Time: O(n^2); space O(1)
+
+Key: maintain the pair (i,j) with greatest gap, when go through the array
+f(i): found best pari from 0 to i, and it is <m,n>
+f(i+1): check <m, i+1> and <j, i+1>, j from n to i
+
+Problem
+1. "Time Limit Exceeded", have to be O(n)
+</pre>
+			</li>
+			<li>
+                how to scale up a system
+<pre>
+Search
+
+Frontend
+Backend
+database
+
+scalability
+1. more traffic?
+2. larger content pool?
+
+more traffic/larger content pool
+1. throughput of single server
+a. what's the bottleneck?
+memory: compress, increase memory
+b. cpu
+decrease time complexity
+more cores
+2. scale via more servers
+traffic: vip
+content: partition
+
+coordinator: zookeeper
+</pre>
+			</li>
+			<li>
+                Binary Tree Maximum Path Sum 
+<pre>
+Questions:
+1. what to return when root is null?
+
+Test cases
+1. one node
+2. two nodes
+    2
+3
+3. more
+    1
+2       3
+a. include root
+b. do not include root
+
+root is a key
+the max path must be some path with left child, root, right child
+maintain max path starting with root
+
+
+
+int maxPathSumSub(int &maxSumRoot)
+return maxSum, keep maxSum starting from root
+1. if root is leaf, return root->value; 
+maxSumRoot = maxSum = root->value
+
+2. 
+maxSumRoot = max(maxSumLeft + root->value, maxSumRight + root->value, root->value)
+maxSum = max(maxSumLeft, maxSumRight, maxSumRootLeft + maxSumRootRight + root->value)
+maxSumLeft
+maxSumRootLeft
+maxSumRight
+maxSumRootRight
+
+Problems
+1. root itself may be the largest one: e.g. 2->-1, compare with root itself as well
+2. all minus (zero as ouput is not correct), e.g. {-2,#,-3}, make INT_MIN to be the initial value
+3. overflow: INT_MIN + neg_value, e.g. {-2, 1}. go deeper only when child is not NULL
+4. maxSum = max(maxSum, maxSumRootLeft + maxSumRootRight - root->val); cause root->val already counted
+
+Need further refinement
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

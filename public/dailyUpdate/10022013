@@ -1,0 +1,74 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 2, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Large scale data processiong(密匙一-三)
+				<ul>
+					<li>
+						<pre>
+1. 
+Number of logs: N
+
+naive method
+count all the logs, keep top k
+time: N, 
+
+problem: not able to put all the logs into memory
+
+divide via hash, for each partition, keep top k, merge the results
+
+2. 
+
+10 million records -> 3 million records
+top 10 records
+suppose I can put 1GB into memory, that is 1GB/256 = 4 million records
+
+3.
+use 5 servers
+1. divide 
+2. top10 in each server
+3. merge results
+
+how many unique records?
+
+2 Bytes
+1000 files, 1K
+
+6
+a: 5 billion url, 5 billion * 64 Byte = 300 billion Byte
+b: 
+
+same urls
+divide use same hashing function
+hash function: % 1000, each partition 300 M
+2*1000 files
+same urls: set
+1000 files output with same urls
+merge the 1000 files
+
+11
+hashmap count, when count is greater no less than 2, erase it. may not work if all of them has no duplicates
+hash against integer range
+
+12
+A1aA2
+B1bB2
+a>b, skip B1, A2, find the median of A1abB2
+
+To Practice
+Usage of Trie to count word frequency
+bitmap?
+</pre>
+					</li>
+					<li> TODO: more 密匙, <a href="https://www.facebook.com/notes/facebook-engineering/under-the-hood-indexing-and-ranking-in-graph-search/10151361720763920">Under the Hood: Indexing and ranking in Graph Search</a>, <a href="https://www.facebook.com/notes/facebook-engineering/under-the-hood-the-natural-language-interface-of-graph-search/10151432733048920">Under the Hood: The natural language interface of Graph Search</a>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

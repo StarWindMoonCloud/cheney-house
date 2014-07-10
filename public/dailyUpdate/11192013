@@ -1,0 +1,47 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Nov 19, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode question
+				<ul>
+					<li>  Binary Tree Inorder Traversal
+						<pre>
+Test case:
+1. empty tree
+2. one node
+3. left child only
+4. normal
+
+a. Recursively
+empty, return
+visit left child
+current
+visit right child
+b. use stack
+init: push until no left child left
+while(!stack.empty) {
+get top;
+pop;
+visit
+move to right child p
+while (p) {
+push p,
+p = p->left
+}
+
+}
+
+How to refine?
+Further thinking: how to traversal without stack
+</pre>
+					</li>   
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

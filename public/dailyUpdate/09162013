@@ -1,0 +1,80 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 16th, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review
+				<ul>
+					<li>
+						Roman to Integer
+						<pre>
+Symbol	Value
+I	1
+V	5
+X	10
+L	50
+C	100
+D	500
+M	1,000
+
+rules:
+1. the numeral I can be placed before V and X to make 4 units (IV) and 9 units (IX) respectively
+2. X can be placed before L and C to make 40 (XL) and 90 (XC) respectively
+3. C can be placed before D and M to make 400 (CD) and 900 (CM) according to the same pattern
+
+check the current char
+a. I(IV,IX: -1; 1),X(XL,XC:-10; 10),C(CD,CM:-100; 100)
+b. others: directly add</pre>
+					</li>
+					<li>
+						3Sum Closest
+						<pre>
+						2Sum closet
+a. sort
+b. two pointers
+
+a. sort
+b. Same as 2Sum closet, only that one element is fixed
+for (int k = 0; k &lt; n - 2; k++)
+for(int i = k, j = n - 1; i!=j;) {
+}
+
+Attention
+Need to continue as long as not equal to target</pre>
+					</li>
+					<li>
+						Remove Nth Node From End of List
+						<pre>
+						a. count the length l
+b. start from the beginning, remove (l-n)th element 
+
+Attention
+first element?
+need to record pointer of the previous node as well</pre>
+					</li>
+				</ul>
+			</li>
+			<li>
+				Othello Next Steps
+				<ul>
+					<li>
+						Game vs computer</li>
+					<li>
+						Game for two players remotely</li>
+					<li>
+						More friendly UI (Add rules; make black/while selectable)</li>
+					<li>
+						Fix further bugs</li>
+					<li>
+						Align game rules</li>
+					<li>
+						Implement easy/medium/hard mode</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

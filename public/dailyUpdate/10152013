@@ -1,0 +1,53 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 13, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode question
+				<ul>
+					<li>   N-Queens 
+						<pre>
+n-queens
+
+Testing
+1. n 0
+2. n 1
+3. n 2
+
+backtrace
+while valid row
+
+place step in row
+a. valid
+i. last row, output and backtrace
+ii. move forward
+
+b. invalid
+i. not last element 
+move forward
+ii else
+backtrace
+
+storage:
+queue position of each row
+
+isValidStep
+1. row < colLen
+2. check with all previous rows (horizontal, vertical, diagonal)
+
+Points of attention
+isValidStep for the first row??
+reset current row before backtrace
+isValidStep both col and row can not be greater or equal than n
+queueArr[row]++ twice...
+						<pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

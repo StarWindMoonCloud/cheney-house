@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ving Introduction</title>
+<style type="text/css">
+body {font-size:3em;}
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+</style>
+</head>
+	<body>
+		<pre>
+Good morning, everyone, I am glad to be here for this interview, now please allow me to introduce myself.
+
+My name is Wang Weiying, I come from xi’an city, shannxi province. 
+I received my bachelor degree from Xi’dian University, after that I was recommended as Ph.d student of Institute of Semiconductors, major in Microelectronics and Solid State electronics. My research area is optical properties of gallium nitride and alluminium nitride material, which are the material of deep ultraviolet Semiconductor Opto-Electronics, such as LED. 
+Powered by our unique home-made deep UV laser spectroscopy system, we did lots of experiments and had meaningful findings with several papers and patents. Besides which, I developed long-wavelength quantum-dot laser diodes and conducted a series of electrical test on these laser diodes. 
+
+In my spare time I love sports, such as running and badminton. 
+That’s all! Thank you
+
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 7-8, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review (1 new and 3 review)
+				<ul>
+					<li>
+						Subsets && SubsetsII
+						<pre>
+subsets
+
+[1,2,3]
+->[1,2] + 3
+->[1] + 2 + 3
+
+[1]
+[], [1]
+
+[1,2]
+[], [1], [2], [1,2]
+
+Testing
+1. empty
+2. one element
+3. normal
+[1]
+[], [1]
+
+[1,2]
+[], [1], [2], [1,2]
+
+[1,2,3]
+[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]
+
+Solution
+1. sort
+2. push empty set
+3. for S[i]
+copy current sets, and append S[i] to the copied ones
+
+Questions
+1. sort vector how? sort(v.begin(), v.end())
+
+subsets II
+
+Testing
+1. empty
+2. single element
+3. no duplicated
+4. with duplicated 
+[1,2,2]
+[1]
+[],[1]
+[1,2]
+[],[1],[2],[1,2]; 2
+[1,2,2]
+[],[1],[2],[1,2], [2,2],[1,2,2];2
+
+Solution
+1. sort
+2. push empty set, lenPre = 0
+3. for S[i]
+a. not equal to S[i-1]
+copy current sets, and append S[i] to the copied ones
+update lenPre
+b. equal to S[i-1]
+copy the last lenPre member and append S[i] to them
+
+how to avoid duplicated sets with duplicated values
+1. append to those ending with the value? Not enough
+[2,2]
+[],[2],[2,2]; 1
+[2,2,2]
+[],[2],[2,2],[2,2],[2,2,2]
+2. relation of append number with previous len?
+equal
+
+How to refine
+1. separate out the first two sets ([], [S[0]]) or add i==0 to the first if case
+2. combine two if's
+
+Points of attention
+1. lenPre initial value is 1! (if separate out the first two sets)
+</pre>
+					</li>
+					<li>
+						Same Tree 
+						<pre>
+Transversal both and check if equal everywhere
+
+Test cases:
+1. one or both empty
+1 ""
+2. equal
+ 1
+2 3
+3. not equal
+ 1
+2 3
+
+ 1
+3 2
+
+recursively
+1. both empty: true
+2. one empty the other not: false
+3. both nonempty
+a. current equal, isSameTree left and right
+b. current not equal false;
+</pre>
+					</li>
+				</ul>
+			</li>
+			<li>
+				System design - Design facebook news feed
+                <pre>
+Questions (user cases, system goal)
+1. how many users: 1 billion
+2. events per minutes: 1M
+3. Goal is the news feed system: real time news feed experience
+
+Core classes: User, Feed, FeedManagementCenter
+
+Relationship
+User has feed queue for the feeds go to him
+FeedManagementCenter maintain the communication of the feeds
+
+Key actions:
+refresh, new/delete feed, forward
+
+Definitions
+class Feed {
+public:
+    Feed(string text);
+    bool addListener(string name);
+private:
+    string body;
+    vector<string> atList;
+}
+
+class User {
+public:
+    void createFeed(string text, vector<string> &atList); // create feed and send it to server
+    void refresh(); 
+private:
+    string name;
+    string id; //unique
+    vector<string> friends;
+    queue<Feed> feedQueue;
+}
+
+class FeedManagementCenter {
+public: 
+    void listen();
+    void processFeed();
+private:
+    map<string, User*> userMap;
+}
+
+Go through event
+create feed, refresh
+User createFeed, 
+FeedManagementCenter receives feed, processFeed, append the feed to the atList friends queue
+
+Friend refresh, get top N feeds from the queue
+
+Problems:
+1. atList input api?
+2. mechanism of communication
+3. Feed queue, point or not? not
+4. FeedManagementCenter how to deal with requests, http?
+5. Where to store user info? server
+6. scalability? 
+                </pre>
+			</li>
+			<li>
+			    CC (16.5)
+                <pre>
+Foo
+first() --> threadA
+second() --> threadB
+third() --> threadC
+bool firstCalled;
+bool secondCalled;
+
+design a lock, that can pass down based on a rule
+
+sequence, in series
+
+first() {
+lock.lock();
+// first thing
+firstCalled = true;
+lock.unlock();
+}
+second() {
+if(firstCalled) {
+lock.lock();
+// second thing
+secondCalled = true;
+lock.unlock();
+}
+}
+
+third() {
+if(secondCalled) {
+lock.lock();
+// third thing
+firstCalled = false;
+secondCalled = false;
+lock.unlock();
+}
+}
+
+Problems:
+1. not actually call sequence
+2. why boolean variable does not work?
+                </pre>
+			</li>
+			<li>
+                resume/review all the previous (website, game, etc)
+                <ul>
+                    <li> Merge Sorted Array 
+                        <pre>
+Questions:
+1. length of both array's? A has additional space
+2. where to store the result? merge B into A
+
+Test cases
+1. one or both empty
+"", ""
+"", [1,2,3]
+2. normal
+A:[4,7]; B:[1,3,6,9]
+
+void merge(int A[], int m, int B[], int n) 
+
+Solution
+1. shift A with lenB
+2. 3 pointers
+
+void merge(int A[], int m, int B[], int n) {
+    for(int i = m - 1; i >= 0; i--) {
+        A[i+n] = A[i];
+    }
+    int i = 0, j = n, k = 0;
+    while(k < n && j < m + n) {
+        if (A[j] < B[k]) {
+            A[i++] = A[j++];
+        } else {
+            A[i++] = B[k++];
+        }
+    }
+    while(k < n) {
+        A[i++] = B[k++];
+    }
+}
+
+Problems:
+1. A is empty? need to judge both in while (k < n && j < m + n - 1)
+2. Best way: from back to front, insert B into A
+void merge(int A[], int m, int B[], int n) {
+    // IMPORTANT: Please reset any member data you declared, as
+    // the same Solution instance will be reused for each test case.
+    // compare A[m-1], B[n-1], put larger one to A[m+n-1]
+    while (n > 0) {
+        if (m < 1 || A[m-1] < B[n-1]) {
+            // choose n-1
+            A[m+n-1] = B[n-1];
+            n--;
+        } else {
+            A[m+n-1] = A[m-1];
+            m--;
+        }
+    }
+}
+                        </pre>
+                    </li>
+                    <li> Binary Tree Inorder Traversal
+                        <pre>
+                        </pre>
+                    </li>
+                    <li> Interleaving String
+                        <pre>
+recursively
+not efficient 
+
+DP
+                        </pre>
+                    </li>
+                </ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

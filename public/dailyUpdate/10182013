@@ -1,0 +1,36 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 13, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode refinement
+				<ul>
+					<li>   Count and Say
+						<pre>
+How to refine
+1. check i+1 instead of i
+</pre>
+					</li>
+					<li>   First Missing Positive ??
+						<pre>
+</pre>
+					</li>
+					<li> Wildcard Matching
+						<pre>
+Points of attention
+1. Initialization of the first position
+*: use up value
+not *: false, except the first time
+2. if number of nonstar in p is greater than lenS: return false (avoid time limit)
+3. return m[flag][lenS] instead of m[!flag][lenS]
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Jan 27, 2014</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				String to Integer (atoi) 
+						<pre>
+Problem solving methodology
+Start with (key) questions
+Write down test cases
+Solution part
+Giving out my thinking
+Write down general steps
+Start from naive solution
+How to optimize time and space?
+Code according to the above framework
+Manually testing, error correction and enhancement
+
+1:28pm - 1:48
+String to Integer (atoi)
+
+Questions
+1. int range? 32 bits, include positive and negative
+2. what to return for invalid input? 0
+3. "    010"? drop until nonzero
+"  -0012a42"?
+
+Test cases
+1. zero
+2. positive and negative
+3. overflow?
+4. invalid
+
+Solution
+1. bit by bit
+2. check positive and negative separately
+
+Point of attentions
+1. positive sign?
+
+Refinement
+</pre>
+			<li>
+		</ol>
+	</body>
+</html>
+

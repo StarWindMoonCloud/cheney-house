@@ -1,0 +1,65 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 11th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				Cracking the coding interview - review the problems</li>
+			<li>
+				leetcode - review and figure out the unfinished problems
+				<ol>
+					<li>
+						Minimum Window Substring
+						<ul>
+							<li>
+								Note
+								<p>
+									two maps, map charsToFind, map charsFound.<br />
+									tLen count<br />
+									1. move end char, until count == tLen<br />
+									2. when count == tLen, consider move begin to see if shorter window is available<br />
+									a. for current char if charsFound &gt; charsToFind || charsToFind not found, move begin forward until this kind of char not available<br />
+									b. update minLen</p>
+							</li>
+							<li>
+								Points of attention
+								<ul>
+									<li>
+										Do not forget to reduce
+										<p>
+											if (charsToFind.find(S[begin]) != charsToFind.end() ) { charsFound[S[begin]]--; }</p>
+									</li>
+									<li>
+										Record minBegin and minEnd since begin and end may change after minWindow found</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Word Search
+						<ul>
+							<li>
+								Note
+								<p>
+									recursively rowSize, colSize int r, int c, word, m, v Termination: r &gt;= rowSize || c &gt;= colSize false word == null true a. m[r][c] == word[0] check up down left right with word[1-len] b. m[r][c] != word[0] check up down left right with word</p>
+							</li>
+							<li>
+								Points of attention</li>
+							<li>
+								when to change visited??</li>
+							<li>
+								what if one direction check is true?</li>
+							<li>
+								can the below sentences be avoided? int rowSize = board.size(); if (rowSize &lt;= 0) return false; int colSize = board[0].size();</li>
+							<li>
+								if all direction fail, do not forget the special case: current word length 1</li>
+						</ul>
+					</li>
+				</ol>
+			</li>
+		</ul>
+	</body>
+</html>
+

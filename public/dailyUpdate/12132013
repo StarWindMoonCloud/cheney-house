@@ -1,0 +1,73 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 13, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Longest Consecutive Sequence 
+						<pre>
+Questions:
+0. definition of Consecutive Sequence: increment is 1
+1. Time complexity: O(n)
+
+Test cases:
+1. empty 
+2. one element
+3. normal
+a. sorted
+[1,2,3]
+b. non-sorted
+[1,3,2]
+4. with duplicated value
+[0,1,1,2]
+
+
+Solution
+1. naive method
+sort, and go through the array
+countMax, countCur
+for each num[i]
+if increment is one, countCur++
+else update CountMax, init countCur
+
+2. DP?
+Consecutive seq, recored the max element and count --> Map
+f(i): longest seq from 0-i
+f(i+1)
+
+3. use map to store the max value and its count
+for each num[i]
+if num[i] not in the map
+    if num[i] - 1  in the map
+        add num[i] to the map with count+1
+    else 
+        add num[i] with 1
+        
+go through the map, return the max value
+using hash
+HashMap<key, value>
+key: starting value (some value of array member)
+value: len alredy found with the above key as starting value
+1. init <a[i], 1>
+2. for each element in map, merge all the key+value->key members into it
+
+Problem 
+1. case [1,3,2]
+
+Points of attentions
+1. initial value of max (one element case)
+2. the last countCur should not be forgotten (the [1,2,3] case)
+3. duplicated value case? (use pre instead of num[i-1])
+4. need to continue searching: while(itNext != countMap.end()) instead of if(itNext != countMap.end())
+
+Refinement
+put the max search loop inside previous loop
+use max/min function instead of if
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

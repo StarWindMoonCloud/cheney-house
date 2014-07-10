@@ -1,0 +1,470 @@
+1. Design/Implement LRU Cache  
+Similar to 'Design/Implement LRU Cache'. Key requirements: efficient look
+-up while maintaining insertion order.
+
+Cache:
+value: string
+<key, value> storage
+
+actions:
+get(key) 
+found: value
+not found: empty
+set(key, value)
+old key: overwrite the old value
+new key: enough room, set
+         not enough storage, need to be replaced
+        
+class Cache {
+public:
+    string get(string key);
+    set(string key, string value);
+private:
+    map<string, ListNode*> m;
+    ListNode *head;
+    ListNode *tail;
+    int capacity;
+    int count;
+}
+
+class ListNode {
+    string value;
+    ListNode *pre;
+    ListNode *next;
+    friend class Cache;
+}
+
+string Cache::get(string key) {
+    string res = ""
+    if (m.find(key) != m.end()) {
+        res = m[key]->value;
+        moveToHead(head, m[key]);
+    }
+    return res;
+}
+
+void Cache::set(string key, string value) {
+    if (m.find(key) != m.end()) {
+        m[key]->value = value;
+        moveToHead(head, tail, m[key]);
+    } else {
+        if (count > capacity) {
+            deleteTail(head, tail);
+            count--;
+        }
+        m[key] = new ListNode(value);
+        moveToHead(head, tail, m[key]);
+        count++;
+    }
+}
+Data structure
+map<key, string>
+no information about history
+another data structure
+
+LRU: 
+List {
+key
+}
+
+tail: LRU
+
+combine together
+List: Doubly linked
+map<key, ListNode*>
+
+get
+1. look up map
+2. move ListNode to the head of the list
+
+set 
+existed
+update value, move ListNode to the head of the list
+new
+still has room: new ListNode, add it into map, move it to head
+ow: Delete tail, new ListNode, add it into map, move it to head
+
+2. Design elevator system (http://www.mitbbs.com/article3/JobHunting/31510323_0_tn.html)
+Questions:
+1. user case
+Office building
+2. traffic
+not heavy; 10 per minute
+3. Each floor, how many panels? one first
+
+Define core classes
+Elevator, Controller, Panel, Passenger
+Floor
+
+Relationship between classes
+1. Each elevator has a panel
+2. Controller has N Elevator's
+Controller has K Floors
+3. Each floor has M panels
+4. Passenger
+
+Actions
+Elevator
+status: stopped, going up, going down
+accept request from Controller
+variables: destination, status, full/empty, limit
+
+Controller
+listen to panels of all the floors
+schedule a request
+
+Panel
+send request to Controller
+
+Passenger
+issue a request
+
+
+1. handle ambiguity
+2. Core classes
+3. Relationship
+4. Actions
+
+Define classes
+
+class Panel {
+public:
+    bool issueRequest(int direction); // send request to controller
+    void listen();
+private:
+    int elevatorNo; // -1 if belongs to a floor
+    int floorNo; // -1 if belongs to an elevator
+    int panelId;
+}
+
+class Passenger {
+public:
+    pickMeUpForDown(Panel &p); // issue an request to Controller
+    pickMeUpForUp(Panel &p);
+private:
+    string name;
+}
+
+class Elevator {
+public:
+    void moveUp(int from, int to)
+    void moveDown(int from, int to);
+private:
+    int status;
+    int floor;
+    int passengerNo;
+    queue<Action> actionQueue;
+}
+
+class Controller {
+public: 
+    appendAction(Elevator &e, Action &a);
+    schedule(); // match command with actions
+    listen();
+private:
+    Elevator elevators[N];
+    Panel panels[M];
+}
+
+class Action {
+public: 
+    enumDirection getDirection();
+    int getDstFloor();
+    void setDirection();
+    void setDstFloor();
+private:
+    enumDirection d;
+    int dstFloor;
+}
+
+Go through one case:
+1. Passenger -> pickMeUpForUp(p);
+2. Panel p (listen), accept the request and issueRequest(up);
+3. Controller accept the request and schedule
+a. check status of all (partially) the elevators (how to be more efficient, status queues (for each status there's a queue)? how to choose the best candidate)
+b. append command to the chosen candidate
+c. controller are done
+
+Elevator part
+while(!actionQueue.empty()) {
+pick up task from queue 
+execute task
+}
+(check strategy??)
+
+Questions
+communication? Connection between controllers and panels
+Furthermore, multithread issue
+capsulation
+how to listen
+visually draw
+
+3. Design a file system
+Questions
+functionalities
+1. new/delete file/directory
+2. rename, cp, etc
+
+how many kinds of files?
+regular file, directory
+
+Core classes
+1. File --> Entry
+2. Directory --> Entry
+3. top level class, maintaining all the files (FileSystemManager : single instance)
+map<string, Entry>
+
+Relationship
+Directory is a special file
+FileSystemManager has all the files info, starting from root directory, providing necessary api's
+
+Actions
+1. new/delete
+2. rename
+
+class Entry {
+    void setPath(string path);
+    void getPath();
+    void setName(string name);
+    void rename(string name);
+private:
+    string name;
+    string path;
+}
+
+class File : public Entry {
+public:
+    string getDirectory();
+    File(string name, string path);
+private:
+    Entry *parent;
+}
+
+class Directory : public Entry {
+    void addFile(Entry *);
+    void addDirectory(Entry *);
+    bool hasFile(string name);
+private:
+    Entry *parent;
+    map<string, Entry*> itemMap;
+}
+
+class FileSystemManager{
+public: 
+    bool createFile(string name, string path);
+    bool createDirectory(string name, string path);
+    void list(string path);
+    FileSystemManager* getInstance();
+private:
+    map<string, Entry*> rootFiles;
+    string name;
+    FileSystemManager(string name);
+    FileSystemManager *fs;
+}
+
+Questions:
+1. do we really need FileSystemManager?
+2. FileSystemManager single instance??
+3. Directory class itemMap?
+
+4. System design - Design facebook news feed
+Questions (user cases, system goal)
+1. how many users: 1 billion
+2. events per minutes: 1M
+3. Goal is the news feed system: real time news feed experience
+
+Core classes: User, Feed, FeedManagementCenter
+
+Relationship
+User has feed queue for the feeds go to him
+FeedManagementCenter maintain the communication of the feeds
+
+Key actions:
+refresh, new/delete feed, forward
+
+Definitions
+class Feed {
+public:
+    Feed(string text);
+    bool addListener(string name);
+private:
+    string body;
+    vector<string> atList;
+}
+
+class User {
+public:
+    void createFeed(string text, vector<string> &atList); // create feed and send it to server
+    void refresh(); 
+private:
+    string name;
+    string id; //unique
+    vector<string> friends;
+    queue<Feed> feedQueue;
+}
+
+class FeedManagementCenter {
+public: 
+    void listen();
+    void processFeed();
+private:
+    map<string, User*> userMap;
+}
+
+Go through event
+create feed, refresh
+User createFeed, 
+FeedManagementCenter receives feed, processFeed, append the feed to the atList friends queue
+
+Friend refresh, get top N feeds from the queue
+
+Problems:
+1. atList input api?
+2. mechanism of communication
+3. Feed queue, point or not? not
+4. FeedManagementCenter how to deal with requests, http?
+5. Where to store user info? server
+6. scalability? 
+
+
+Amazon show best-selling items
+Identifying best-selling items
+                                                                                                                                                              
+Input: stream of product id - 1 id for each purchase
+
+Provide top 10 best selling items
+
+recordPurchase()
+getTopTen()
+
+
+Questions
+1. definition best selling, time range (history)
+2. quantity: Millions
+3. no customer info
+4. storage: in memory
+
+Solution
+class HeapItem {
+    string id;
+    string value;
+    friend class TrendingAPI;
+}
+class TrendingAPI {
+public:
+    void recordPurchase(string id);
+    vector<string> getTopTen();
+private:
+    map<string, int> itemCount;
+    vector<HeapItem*> heapTop10;
+    int itemNum;
+    int heapSize;
+    void updateHeap(string);
+}
+
+void TrendingAPI::recordPurchase(string id) {
+    // 1. update map
+    // 2. update heap
+    if (itemCount.find(id) == itemCount.end()) {
+        itemCount[id] = 1;
+        itemNum++;
+    } else {
+        itemCount[id]++;
+    }
+    
+    updateHeap(id);
+}
+
+void TrendingAPI::updateHeap(string id) {
+    // itemNum < 10: no action
+    // itemNum == 10: build heap
+    // itemNum > 10: heapfy (min heap), need to check if the item is alread in heap
+    if (itemNum < 10) {
+        return;
+    }
+    if (itemNum == 10) {
+        buildHeap();
+        return;
+    }
+    
+    if (itemCount[id] > heapTop10[0]->count) {
+        int indexHeap = indexOfHeap(id);
+        if (indexHeap== -1) {
+            HeapItem *newItem = new HeapItem(id, itemCount[id]);
+            delete heapTop10[0];
+            heapTop10[0] = newItem;
+            heapfy(0);
+        } else {
+            heapfy(indexHeap);
+        }
+    }
+}
+
+void TrendingAPI::heapfy(int start) {
+    // heapfy from start to heapSize
+    // 1. compare with left and right, and record the smallest
+    // 2. smallest one is not start, exchange and recursively heapfy
+    if (start >= heapSize) {
+        return;
+    }
+    
+    int indexMin = start;
+    int left = leftChild(start);
+    int right = rightChild(start);
+    if (left < heapSize && heapTop10[indexMin]->count > heapTop10[left]->count) {
+        indexMin = left;
+    }
+    if (right < heapSize && heapTop10[indexMin]->count > heapTop10[right]->count) {
+        indexMin = right;
+    }
+    
+    if (indexMin != start) {
+        swap(heapTop10[start], heapTop10[indexMin]);
+        heapfy(indexMin);
+    }
+}
+
+void TrendingAPI::buildHeap() {
+    int start = heapSize>>1;
+    for (int i = start; i >= 0; i--) {
+        heapfy(i);
+    }
+}
+
+class comp {
+public: 
+    bool operator () (const HeapItem* a, const HeapItem* b) {
+        return a->count < b->count;
+    }
+} 
+vector<string> TrendingAPI::getTopTen() {
+    int minTop = min(itemCount, heapSize);
+    vector<HeapItem*> top10;
+    vector<string> ids;
+    for (int i = 0; i < minTop; i++) {
+        HeapItem *newItem = HeapItem(heapTop10[i]);
+        top10.push_back(newItem);
+    }
+    
+    sort(top10.begin(), top10.end(), comp());
+    
+    for (int i = 0; i < minTop; i++) {
+        ids.push_back(top10[i]->id);
+    }
+    
+    return ids;
+}
+
+Points of attention
+update item which is already in heap 
+
+To improvement
+1. OOP, use an outside class for it
+2. update item which is already in heap, improve heapfy
+3. sort top10?
+4. how to further reduce the complex of indexOfHeap
+
+private static constant heapSize?
+TrendingAPI singleton?
+itemNum < 10, getTop10?
+indexOfHeap constant?

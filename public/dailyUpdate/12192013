@@ -1,0 +1,251 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 19, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Identifying best-selling items (better solution than original in interview history)
+						<pre>
+Solution
+class HeapItem {
+    string id;
+    string value;
+    friend class TrendingAPI;
+}
+class TrendingAPI {
+public:
+    void recordPurchase(string id);
+    vector<string> getTopTen();
+private:
+    map<string, int> itemCount;
+    vector<HeapItem*> heapTop10;
+    int itemNum;
+    int heapSize;
+    void updateHeap(string);
+}
+
+void TrendingAPI::recordPurchase(string id) {
+    // 1. update map
+    // 2. update heap
+    if (itemCount.find(id) == itemCount.end()) {
+        itemCount[id] = 1;
+        itemNum++;
+    } else {
+        itemCount[id]++;
+    }
+    
+    updateHeap(id);
+}
+
+void TrendingAPI::updateHeap(string id) {
+    // itemNum < 10: no action
+    // itemNum == 10: build heap
+    // itemNum > 10: heapfy (min heap), need to check if the item is alread in heap
+    if (itemNum < 10) {
+        return;
+    }
+    if (itemNum == 10) {
+        buildHeap();
+        return;
+    }
+    
+    if (itemCount[id] > heapTop10[0]->count) {
+        int indexHeap = indexOfHeap(id);
+        if (indexHeap== -1) {
+            HeapItem *newItem = new HeapItem(id, itemCount[id]);
+            delete heapTop10[0];
+            heapTop10[0] = newItem;
+            heapfy(0);
+        } else {
+            heapfy(indexHeap);
+        }
+    }
+}
+
+void TrendingAPI::heapfy(int start) {
+    // heapfy from start to heapSize
+    // 1. compare with left and right, and record the smallest
+    // 2. smallest one is not start, exchange and recursively heapfy
+    if (start >= heapSize) {
+        return;
+    }
+    
+    int indexMin = start;
+    int left = leftChild(start);
+    int right = rightChild(start);
+    if (left < heapSize && heapTop10[indexMin]->count > heapTop10[left]->count) {
+        indexMin = left;
+    }
+    if (right < heapSize && heapTop10[indexMin]->count > heapTop10[right]->count) {
+        indexMin = right;
+    }
+    
+    if (indexMin != start) {
+        swap(heapTop10[start], heapTop10[indexMin]);
+        heapfy(indexMin);
+    }
+}
+
+void TrendingAPI::buildHeap() {
+    int start = heapSize>>1;
+    for (int i = start; i >= 0; i--) {
+        heapfy(i);
+    }
+}
+
+class comp {
+public: 
+    bool operator () (const HeapItem* a, const HeapItem* b) {
+        return a->count < b->count;
+    }
+} 
+vector<string> TrendingAPI::getTopTen() {
+    int minTop = min(itemCount, heapSize);
+    vector<HeapItem*> top10;
+    vector<string> ids;
+    for (int i = 0; i < minTop; i++) {
+        HeapItem *newItem = HeapItem(heapTop10[i]);
+        top10.push_back(newItem);
+    }
+    
+    sort(top10.begin(), top10.end(), comp());
+    
+    for (int i = 0; i < minTop; i++) {
+        ids.push_back(top10[i]->id);
+    }
+    
+    return ids;
+}
+
+Points of attention
+update item which is already in heap 
+
+To improvement
+1. OOP, use an outside class for it
+2. update item which is already in heap, improve heapfy
+3. sort top10?
+4. how to further reduce the complex of indexOfHeap
+
+private static constant heapSize?
+TrendingAPI singleton?
+itemNum < 10, getTop10?
+indexOfHeap constant?
+</pre>
+			</li>
+			<li> reverse integer (review)
+<pre>
+Test case
+1. 1
+2. -1
+3. 123, -123
+
+from lowest to highest, reverse
+Question:
+1. overflow??
+</pre>
+			</li>
+			<li> Roam to Integer (review)
+<pre>
+Test cases
+I
+IX
+VIIV
+
+I   1
+V   5
+X   10
+L   50
+C   100
+D   500
+M   1,000
+
+IV  4
+IX  9
+XL  50
+XC  90
+CD  400
+CM  900
+
+Add digit by digit, but some values are special
+IV, VI
+IX, XI
+I(V/X), X(L/C), C(D/M) can be minus
+
+
+oneSet
+allSet
+valueMap
+
+1. not in oneSet
+add value
+2. in oneSet
+check the next one (next/cur = 5 or 10)
+minus value
+
+Question:
+1. where to init map? In constructor
+</pre>
+			</li>
+			<li> Merge k Sorted Lists (ascending order, review)
+<pre>
+minHeap
+each time pick up the min one, add it to the tail
+
+1. build heap
+2. while heapSize is nonzero
+heap pop
+add to resList
+if next? add next and heapfy
+else heapSize--, lists.pop_back()
+
+Points of attention,
+Need to remove empty first
+default maxHeap, need redefine comp()
+need lists.pop_back(); when removing one element
+
+Refinement
+heapSize can be replaced by lists.size();
+
+</pre>
+			</li>
+			<li> Minimum Path Sum 
+<pre>
+Test case
+1. one row 1 1 1
+2. one column
+3. others
+more than two paths
+1 1 1
+2 1 0
+
+f(i,j): path from (0, 0) to (i, j) with minSum
+
+DP
+f(i, j) = min(f(i-1, j) + m[i,j], f(i, j-1) + m[i,j])
+
+1. use a matrix to save min weight --> can be improvement
+
+1 1 1
+2 1 0
+
+0 1 2
+1 2 3
+
+2. two rows as extra memory
+separate first row
+if fist col, one way
+else two ways, choose min
+
+Points of attention
+flag != flag does not work...
+
+Refinement:
+use if (grid.empty() || grid[0].empty()) return 0;
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

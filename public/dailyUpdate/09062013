@@ -1,0 +1,75 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 6th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			leetcode -- Interleaving String
+			<li>
+				Note
+				<pre>
+s1
+s2
+
+1. two pointers
+p1, p2
+
+s3--&gt; p3
+
+check if p3 equals to p1 or p2
+if not false
+yes
+a. move p1 if *p1 == *p3
+b. move p2 if *p2 == *p3
+move p3
+
+Points of attention
+do not forget the rest of s1 or s2
+&quot;aa&quot; &quot;ab&quot; &quot;aaba&quot; can not be corrected determined by two pointers method (so it&#39;s incorrect method)
+
+2. recursive
+s1:[0,1,...,m]
+s2:[0,1,...,n]
+s3:[0,1,...,m+n]
+
+f(s1,s2,s3) 
+a. s3[m+n] == s1[m] &amp;&amp; s3[m+n] != s2[n]
+f(s1,s2,s3) = f(s1[0,1,...,m-1],s2, s3[0,1,...,m+n-1])
+b. s3[m+n] != s1[m] &amp;&amp; s3[m+n] == s2[n]
+f(s1,s2,s3) = f(s1,s2[0,1,...,n-1], s3[0,1,...,m+n-1])
+c. s3[m+n] == s1[m] &amp;&amp; s3[m+n] == s2[n]
+f(s1,s2,s3) = (f(s1[0,1,...,m-1],s2, s3[0,1,...,m+n-1]) || f(s1,s2,s3) = f(s1,s2[0,1,...,n-1], s3[0,1,...,m+n-1]))
+d. s3[m+n] != s1[m] &amp;&amp; s3[m+n] != s2[n]
+false
+</pre>
+			</li>
+			<li>
+				Testing
+				<pre>
+1. empty strings
+&quot;&quot; &quot;&quot; &quot;&quot;
+2. one empty, the other not
+&quot;&quot; &quot;a&quot; &quot;a&quot;/&quot;b&quot;
+3. normal
+&quot;abab&quot; &quot;cdcd&quot; &quot;acdbabcd&quot;
+&quot;aa&quot; &quot;ab&quot; &quot;aaba&quot;
+</pre>
+			</li>
+			<li>
+				Points of attention
+				<ul>
+					<li>
+						do not forget the rest of s1 or s2</li>
+					<li>
+						&quot;aa&quot; &quot;ab&quot; &quot;aaba&quot; can not be corrected determined by two pointers method (so it&#39;s incorrect method)</li>
+					<li>
+						Be careful of &quot;len == 0&quot; for recursive method</li>
+					<li>
+						Manual testing is important with all possible cases</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

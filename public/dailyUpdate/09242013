@@ -1,0 +1,55 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 24, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review
+				<ul>
+					<li>
+						Maximum Subarray
+						<pre>
+Maximum Subarray 
+
+Testing 
+1. empty
+2. one element
+3. two elements
+4. normal
+
+naive method
+two loops: Time O(n^2)
+
+how to reuse the computed sum
+1. i, j
+compute sum (preSum)
+2. when to move forward the two indices
+
+Another way: the properties of such subarray?
+1. contain the largest element
+2. check the left and right side, see how many positive sum each side can reach, recode the index
+3. the above indices are what we are looking for
+
+Points of attentions
+What if duplicated max element ([3,-2,-3,-3,1,3,0])
+
+DP 
+Time: O(n^2) depends on data
+Define f as the sum starting from the first element
+f(a1, a2,..., an) = max(a1+f(a2, a3, ..., an), a1)
+
+How to achieve O(n)
+Define f as the sum ending at the last element
+f(a1, a2,..., an) = max(f(a1, a2, ..., a(n-1))+an, an)
+
+The above two are symmetric, O(n) and need two extra variable for the sum's
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

@@ -1,0 +1,105 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 17, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode question
+				<ul>
+					<li>   Largest Rectangle in Histogram
+						<pre>
+naive method
+for each <start, end>, compute the max
+n^3
+
+find the <start, end> for a given length
+go through the histogram
+1. rise, push to stack
+2. pop stack, compute, update
+3. push back a zero element
+
+Testing is very important, test case first
+
+Points of attention
+do not forget the last rising area
+compare value by value not index
+how to handle [2, 1, 2]: 1. push_back 0 to height 2. i++ only when push
+how to handle [4,2,0,3,2,5]: use i - s.top() -1 as width instead of i - left
+						<pre>
+					</li>
+					<li>   Maximal Rectangle
+						<pre>
+0 0 0 0
+1 1 1 1
+0 1 1 0
+1 0 1 1
+
+naive method 
+at each point, for each width and height combination, check 
+O((mn)^2)
+
+Stand at each row: it's a histogram, find the max rectangle.
+
+1. convert matrix to histogram standing at each row
+a. init as all zero
+b. for each cell, if not zero, value above + 1
+2. compute the max rectangle for each row, update the max
+
+O(mn), space O(mn)
+
+Testing
+1. empty
+2. single row/column
+0 0 1 1 1 0
+
+1
+0
+1
+1
+
+3. normal
+0 0 0 0
+1 1 1 1
+0 1 1 0
+1 0 1 1
+						</pre>
+					</li>
+					<li>   Container With Most Water 
+						<pre>
+Testing
+1. empty
+2. 1 elements
+3. normal length
+12323
+
+
+naive method
+check each pair
+n^2
+
+O(n)?
+
+pair <i, ai>, <j, aj>
+maximize (abs(i-j) * min(ai, aj))
+
+(1, a1)
+(2, a2): max(a2, a1) * (2-1)
+(3, a3): max(f((2,a2)), min(a3,a1)*(3-1), min(a3,a2)*(3-2)
+(4, a4)
+
+
+f(i, ai) = max(f(i-1, a(i-1)), min(ai, a1)*(i-1), min(ai, a2)*(i-2)...)
+still n^2
+
+use two pointers
+O(n)
+						</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

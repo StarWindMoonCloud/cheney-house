@@ -1,0 +1,51 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 16th, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review
+				<ul>
+					<li>
+						Merge k Sorted Lists
+						<pre>
+a. treat lists[] vector as a heap
+b. build heap (top: samllest)
+c. move forward on the list at heap top (replace it with the last heap element)
+i. if list ends, heapSize--
+ii. ow move forward
+remove the smallest node from the heap and add it into the list
+d. Minify heap
+e. loop c-d until heapSize == 0
+</pre>
+					</li>
+					<li>
+						Remove Duplicates from Sorted Array
+						<pre>
+two pointers: i(result index), j(current index)
+a. equal, j++
+b. not equal, i++, copy, j++
+
+Testing
+1. empty
+2. one element
+3. normal length
+a. with duplicates
+[1,1,2,2,3]
+b. without duplicates
+[1,2]
+
+Attention:
+return should be i+1
+
+Important points:
+b. not equal, i++, copy, j++
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>

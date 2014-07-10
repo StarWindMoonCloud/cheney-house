@@ -1,0 +1,32 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 13th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				leetcode - max Path Sum
+				<ul>
+					<li>
+						Key points
+						<p>
+							1. recursively find the sum, bottom -&gt; up<br />
+							2. csum should contain the current node<br />
+							3. pass csum and msum as reference</p>
+					</li>
+					<li>
+						Points of attention
+						<ul>
+							<li>
+								update msum only when msumCur &gt; msum</li>
+							<li>
+								Do not forget return when node == null</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

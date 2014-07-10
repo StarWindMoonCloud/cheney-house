@@ -1,0 +1,100 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 15th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				leetcode - Maximal Rectangle
+				<ul>
+					<li>
+						Notes
+						<pre style="word-wrap: break-word; white-space: pre-wrap;">
+0 0 0 0 0
+1 1 1 1 1
+1 1 1 1 1 
+0 0 1 1 1
+1 1 1 1 1
+
+naive method
+for each valid &lt;point, width, height&gt;, check if it&#39;s all one,
+if yes, update maxArea
+(x,y), width, height : (m*n)^3
+
+advanced method
+reduce it to one dimension
+0 0 0 0 0
+1 1 1 1 1
+2 2 2 2 2 
+0 0 3 3 3
+1 1 4 4 4
+find the max are given the one dimension data
+
+
+1 1 4 4 4
+for i-th element
+suppose hight = v[i]
+what&#39;s the max width?
+
+== or going up: w++, update preh
+going down: calculate the preMaxArea, w=1, 
+0 encountered: 
+
+int maxAreaHist(vector<int> &amp;hVector) 
+
+
+0
+1
+14230
+
+14320
+
+for each height, find out the corresponding width
+need to know the first time this width is met as well as the last time
+14230: expand height 2&#39;s index to 1 when popping 4(1). 
+equal to top: if it is the last one, push to stack with c+1
+
+Stack<pair>
+1. if greater than top, push
+2. if equal to top, next 
+3. if less than top, pop until top &lt;= cur; 
+a. &lt; case1 
+b. = case2 
+
+
+</pair></int></pre>
+					</li>
+					<li>
+						Testing
+						<pre style="word-wrap: break-word; white-space: pre-wrap;">
+1. empty
+2. one element
+3. one row [10]
+4. one column
+5. normal
+</pre>
+					</li>
+					<li>
+						Points of attention
+						<ul>
+							<li>
+								Make sure height is set to zero when 0 encountered</li>
+							<li>
+								Do not forget to calculate the area with the height of the last element</li>
+							<li>
+								for each height, find out the corresponding width</li>
+							<li>
+								need to know the first time this width is met as well as the last time</li>
+							<li>
+								14230: expand height 2&#39;s index to 1 when popping 4(1).</li>
+							<li>
+								equal to top: if it is the last one, push to stack with c+1</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

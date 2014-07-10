@@ -1,0 +1,57 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 30, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Path Sum
+						<pre>
+Test cases
+1. empty tree
+2. one node
+3. two nodes
+4. more nodes
+true/false
+
+Solution
+dfs/Preorder
+
+bool dfs(TreeNode *root, int sum, int target)
+1. root == NULL, return sum == target
+2. root leaf, return sum + root->val == target
+3. dfs(root->child, sum+root->val, target), true if one of them is true
+</pre>
+			</li>
+			<li>
+            Path Sum II
+<pre>
+compared to path Sum
+1. do not terminate when one path found
+2. need to record path
+void dfs(TreeNode *root, vector<int> &path, int sum, int target, vector<vector<int> > &res)
+1. root == NULL, if (sum == target) save path
+2. dfs(child, vector<int> &path, sum + root->val, target, vector<vector<int> > &res)
+need to update path before/after dfs
+
+=>
+1. root == NULL, return
+2. root leaf, if sum + root->val == target save path
+3. dfs(child, vector<int> &path, sum + root->val, target, vector<vector<int> > &res)
+need to update path before/after dfs
+
+Problems
+1. same res outputted twice
+if (root == NULL) {
+    if (sum == target) {
+        res.push_back(path);
+    }
+    return;
+}
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

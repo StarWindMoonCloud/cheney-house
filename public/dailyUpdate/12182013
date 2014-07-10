@@ -1,0 +1,112 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 18, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Palindrome Partitioning II
+						<pre>
+Test case
+1. empty
+2. one element
+3. normal length
+a. isP
+b. not p
+
+f(i): min cut from 0-i
+suppose minCut of before i is computed
+f(i)=min(f(j) + 1) when isP(s[j+1 to i])
+
+Points of attention
+isP DP: len should be the out loop
+the whole string is P: j==0, dp[i] = 0, break;
+</pre>
+			</li>
+			<li> Gas Station
+<pre>
+Test case:
+1. empty station
+2. one station
+3. two/more stations
+
+
+Questions:
+1. if there're multiple indices that satisfy the condition, which to return
+2. what does the circle look like? 0->1->2->3->...->n-1->0
+3. direction? clock and counter-clock?
+
+naive method
+check each station as starting point
+for each nod
+if(sum(g[0-i]) >= sum[c[0 to i]])
+
+Time: O(n^2)
+
+
+O(n)?
+As long as sum(g) >= sum(c), there exists a choice
+Start at any point, and compute the gap
+
+l[i]: gas left when arrives at station i
+find a way so that l[i] >= 0 for all i
+
+gap[i]: gap considering from i to i+1 
+gap[i] = g[i] - c[i]
+
+Points of attention
+1. starting point is start
+2. clear left for each new round
+
+How to refine
+
+DP
+update index when is not positive, alway keep the first index that can keep positive all the time
+</pre>
+			</li>
+			<li> Single Number && Single Number II
+<pre>
+use XOR
+
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        assert(n > 0);
+        int res = A[0];
+        for (int i = 1; i < n; i++) {
+            res ^= A[i];
+        }
+        
+        return res;
+    }
+};
+
+Single Number II
+Test case
+1. empty
+2. 1 number
+3. 4 numbers
+4. other
+
+why XOR works for two same number, cause it's binary
+Need some operation, when 3 same digit applied -> 0
+
+count number of each bit
+Points of attention
+1. shift may suffer for minus number
+2. determine if a bit is 1: (A[j] >> i) & 1; mush have "& 1"
+3. twos need to go first, ow ones would be updated first
+
+use ones, twos, threes
+ones: combination value of all bits that appear once
+twos: combination value of all bits that appear twice
+threes: combination value of all bits that appear three times
+only need to worry about bits whose value is 1
+
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

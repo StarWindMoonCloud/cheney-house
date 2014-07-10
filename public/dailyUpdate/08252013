@@ -1,0 +1,65 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 24-25th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				leetcode 1-2 problems
+				<ol>
+					<li>
+						Merge Sorted Array
+						<ul>
+							<li>
+								Note
+								<pre>
+A m
+B n
+
+merge B to A
+
+two pointers idxa, idxb
+
+1. naive method
+a. insert element B into A
+b. move the rest for each insertion 
+Time: O(mn)
+
+2. how to achieve O(m+n)
+a. move m elements of A n steps forward
+b. now start the comparison
+c. the good point is it&#39;s ok to cover the 0-(n-1) element
+d. if B have elements left, append it to the end
+
+Testing:
+1. two empty arrays
+2. one empty, the other not
+3. array&#39;s with one element
+4. normal array
+a. A is longer
+b. B is longer
+</pre>
+							</li>
+							<li>
+								Points of attention
+								<ul>
+									<li>
+										Move A n steps forward: must copy for the back</li>
+									<li>
+										for loop index should not be i (the index starting from 0)</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Finish HTML5 learning, fix hompage mobile display issue: HTML5 learning DONE; mobile display issue: not done</li>
+					<li>
+						Initial idea/framework of Othello: Will choose HTML5 + JavaScript</li>
+					<li>
+						Company learning: finish Twitter, start Amazon: Twitter DONE, Amazon not started</li>
+				</ol>
+			</li>
+		</ul>
+	</body>
+</html>

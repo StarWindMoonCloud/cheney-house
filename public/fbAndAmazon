@@ -1,0 +1,339 @@
+FB 
+PS 1 2013-10-25
+http://collabedit.com/4qgvx
+Hello Mike
+It's this one:
+http://ec2-54-213-117-188.us-west-2.compute.amazonaws.com/gameInfo
+
+
+// solve for palindrome, retrun true if a word is a palindrome.
+// aba, abba, dad
+
+Questions
+1. no spaces in str?
+There no ', ", 
+2. empty string -> posivie
+3. ",,"?
+
+two pointers, i, j
+check each pair 
+yes: continue
+no: false
+
+bool isPalindrome(string s) {
+    int i = 0, j = s.length() - 1;
+    while( i <= j ) {
+        if (s[i] != s[j]) {
+            return false;
+        } else {
+            i++, j--;
+        }
+    }
+    
+    return true;
+}
+
+Test cases:
+1. "a"
+2. "ab"
+3. "aa"
+4. "aba"
+
+
+// int divide without divide example 31/6 retrun string = 5 R1.
+Questions
+what are input? int's?
+return value: string?
+can not use divide, mod?
+bits of the interger 32?
+
+1. move divisor and compare it with d
+2. bit by bit 
+char* divide(int dividend, int divisor) { (5, 2) -> 101, 10; 11, 10
+    assert(divisor !=0);
+    int intBits = 32;
+    int r = 0;
+    while(divisor <= dividend) {
+        int pos = 0;
+        // TODO figure out how many bits to shift
+        while(divisor << (pos + 1) <= dividend) {
+            pos++;
+        }
+        r = r | (1 << pos);
+        dividend -= (divisor << pos); 
+    }
+    
+    return itoa(r);
+}
+
+FB电面面筋顺求refer
+
+过程比较常规，题目也正常，但是犯了几个不好的错误，深深得惆怅阿。
+
+面试官还晚了5分钟，一开始都在聊其他的，做过的有意思的事（给他看了自己在aws上的游戏），然后聊游戏，最challenge的是什么等等；还有why fb等。
+
+大约过了20分钟，切入coding了。
+第一题是isPalindrome，还稍微简化了下：考虑所有的字符，输入串长度不为0。
+个人用两个"pointer" 做的，犯的第一个错误是在判断字符相等是莫名的加了return true..被指出来了。
+
+第二题是整数除法，不能用/, %, *，简化条件：只考虑整数，但要求返回string。
+花了些时间，但最后更新dividend时忘了移位，应该是dividend -= (divisor << pos), 自己测的时候小慌，没找出来，最后才补上的。
+
+面完后发现还有一个问题没解决，要求是返回string，但itoa的话返回的是char*。现在还不确定int->string的最好方法, std::to_string?
+
+感想：很久没面试了，有点不适应节奏；要在面试中做到bugfree不容易
+继续加强训练，顺求下LAGT的推荐
+
+copy of history: http://collabedit.com/rdsv7
+
+Amazon 
+PS 1 2013-12-11
+Hello John
+
+Amazon show best-selling items
+
+Identifying best-selling items
+
+Input: stream of product id - 1 id for each purchase 
+
+Provide top 10 best selling items
+
+recordPurchase() 
+getTopTen() 
+
+
+Questions
+1. definition best selling, time range (history)
+2. quantity: Millions
+3. no customer info
+4. storage: in memory
+
+Solution
+HashMap for trending info
+recordPurchase -> update map, update heap?
+getTopTen: Heap maintain top 10 only
+
+map<string, int> itemMap
+class HeapItem {
+    HeapItem(string id, int count);
+    string id;
+    string count;
+}
+
+vector<HeapItem*> top10[10];
+int heapSize = 0;
+int heapCount = 0;
+
+minHeap
+void updateHeap(string id, int count) { 1,2,3 (1) -> 1,2,3,1 -> 
+    HeapItem *p = new HeapItem(id, count);
+    if (heapCount < 10) {
+        top10[heapCount++] = p;
+        // need to do heapfy here as well
+    } else {
+       // compare it the the min value in the heap
+       if (count > top10[0]) {
+           // update heap
+           heapFy(top10, heapCount, p);
+       }
+    }
+}
+
+
+void heapFy(vecotr<HeapItem*> top10, int heapSize, HeapItemp* newItem) {
+    //1. replace the first item
+    top10[0] = newItem;
+    heapFySub(top10, heapSize, 0);
+}
+
+void heapFySub(vecotr<HeapItem*> top10, int heapSize, int start) { 
+    // compare down the tree
+    if (start >= heapSize) {
+        return;
+    }
+    int left = getLeftChild(start); "5"
+    int right = getRightChild(start);
+    int minIndex = start; "6"
+    if (left < heapSize && top10[minIndex]->count > top10[left]->count) {
+        minIndex = left;
+    }
+    if (right < heapSize && top10[minIndex]->count < top10[right]->count) {
+        max = right;
+    }
+    
+    if (minIndex != start) {
+        swap(top10, minIndex, start);
+        heapFySub(top10, heapSize, index_min); 
+    }
+}
+
+void recordPurchase(string id) {
+    if (itemMap.find(id) != itemMap.end()) {
+        itemMap[id]++;
+    } else {
+        itemMap[id] = 1;
+    }
+    updateHeap(id, itemMap[id]);
+}
+
+vector<string> getTopTen() {
+    vector<string> ids;
+    for (int i = 0; i < 10; i++) {
+        ids.push_back(itemMap[i]);
+    }
+    sort(ids.begin(), ids.end());
+    return ids;
+}
+
+
+1. cold start
+a. 
+b. 
+2. metrics
+a. 
+b. 
+
+
+http://collabedit.com/532bw
+better solution:
+http://collabedit.com/nyymp
+
+Solution
+class TrendingAPI {
+public:
+    void recordPurchase(string id);
+    vector<string> getTopTen();
+private:
+    map<string, int> itemCount;
+    vector<HeapItem*> heapTop10;
+    int itemNum;
+    int heapSize;
+    void updateHeap(string);
+}
+
+void TrendingAPI::recordPurchase(string id) {
+    // 1. update map
+    // 2. update heap
+    if (itemCount.find(id) == itemCount.end()) {
+        itemCount[id] = 1;
+    } else {
+        itemCount[id]++;
+    }
+    
+    updateHeap(id);
+}
+
+void TrendingAPI::updateHeap(string id) {
+    // 1. itemNum < 10, already in heap (count>1): update count
+    // 1. itemNum < 10, not in heap (count==1): 
+}
+
+Points of attention
+update item which is already in heap 
+
+To improvement
+1. OOP, use an outside class for it
+2. update item which is already in heap, improve heapfy
+3. sort top10?
+4. how to further reduce the complex of indexOfHeap
+
+private static constant heapSize?
+TrendingAPI singleton?
+itemNum < 10, getTop10?
+indexOfHeap constant?
+
+FB                                                                                                                                           
+PS 2 2013-12-19
+https://code.stypi.com/1R2HUwuk7d5JBVn6D5iKXYV4
+
+1) Given two arrays of integers A and B both having n elemets. A is of size
+2n, B is of size n. A and B are sorted in same order. Write a function which takes A and B as
+input and merges A and B in to array A such that final array A is sorted.
+
+
+E.g a = {1, 4, 6, 0, 0, 0}
+    b = {2, 5, 9}
+
+    a = {1, 2, 4, 5, 6, 9}
+
+    a = {1, 2, 3, 0, 0, 0}
+    b = {4, 5, 6}
+    a = {1,2,3,4,5,6}
+    
+    a = {4, 5, 6, 0, 0, 0}
+    b = {1, 2, 3}
+    a = {1, 2, 3, 4, 5, 6}
+    
+void merger(int[] a, int[] b, int n) 
+{
+    int j = n; 
+    int i = n; 
+    while (j > 0) {
+        if (i < 1 || a[i-1] < b[j-1]) {
+            // put b into a
+            A[i+j-1] = B[j-1];
+            j--;
+        } else {
+            A[i+j-1] = A[i-1];
+            i--;
+        }
+    }
+}
+
+Questions:
+api
+asending
+further memory?
+
+Test cases
+1. empty array
+2. one element of b
+3. normal case
+
+Solution:
+1. pointers (i, j)
+2. merger b into a
+3. from the back front
+
+
+
+
+2) Array a is unsorted. Write a function to print three elements (x, y, z)
+such that x+y+z=0.
+
+E.g = {-3, -1, 1, 2, 5, 6}
+result: (-3, 1, 2)
+
+
+Questions
+1. time complexity
+2. funtion
+
+Solution:
+1. hash<int,int>
+2. x+y+z = 0 => x+y = -z
+3. find
+O(n): space
+O(n^2): time
+
+void printSumZero(vector<int> &v) {
+    int len = v.size();
+    map<int, int> elements;
+    for (int i = 0; i < len; i++) {
+        elements[i] = v[i];
+    }
+    for (int i = 0; i < len; i++) {
+        for (int j = i+1; j < len - 1; j++) {
+            map<int, int>::iterator it;
+            it = elements.find(-(v[i]+v[j]));
+            if (it != elements.end() &&  it->first != i && it->first != j) {
+                // print the values;
+                
+            }
+        }
+    }
+}
+
+https://www.facebook.com/MySQLatFacebook
+https://code.facebook.com/projects/
+https://www.facebook.com/Engineering

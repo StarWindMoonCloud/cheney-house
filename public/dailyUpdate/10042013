@@ -1,0 +1,86 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 2, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Game  - Learn minmax, refactor code
+				<ul>
+					<li>
+						<pre>
+(0, 0) 
+(0, 5)
+(5, 0)
+(5, 5)
+
+(2.5, 2.5)
+
+how to evaluate
+consider up-left corner, 
+(0, 0): 5
+distance 1: -3
+distance 2: 1
+
+overall framework
+when place computer
+for each valid steps, compute score with look ahead depth h, pick the best one
+
+how to compute score with look ahead depth h
+1. find all the candidates
+2. generate game tree with depth h
+3. compute score use minmax algorithm
+4. get the info of the best step
+
+TreeNode {
+int[][] boardStatus;
+vector <TreeNode *> children;
+TreeNode *parent;
+int score;
+int x;
+int y;
+}
+
+construct game tree with depth h -- DFS
+1. construct root TreeNode, depth = h
+2. generateGameTree(TreeNode *root, int h)
+if depth == 0 return 
+check all the valid cells agains parent's boardStatus
+	put it into the child list, update child's boardStatus
+	generateGameTree(child, h - 1);
+	
+compute score use minmax algorithm
+computeScore(TreeNode *root, player, h) -- DFS
+if depth == 0, return evaluation score 
+max = -infinity
+for each child
+	computeScore()
+	update max
+
+Combine "construct game tree with depth h" and "compute score use minmax algorithm"
+computeScore(board, player, h, & stepX, &stepY)
+if depth == 0, compute evaluation score
+max = -infinity
+for valid cell against parent's boardStatus
+	computeScore() with new board, player, and h
+	update max, stepX, stepY
+
+Refactor code
+1. separate out js, css code
+2. replace duplicated code with common function
+3. cleaner code
+
+<link rel="stylesheet" href="game/othello/gameStyle.css">
+<script src="game/othello/game.js"></script>                                                                                                               
+
+Make player of black/white selectable
+New game automatically after finished 
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

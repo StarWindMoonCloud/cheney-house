@@ -1,0 +1,18 @@
+<!DOCUMENTTYPE html>
+<html>
+        <head>
+                <title>Othello Requirements</title>
+        </head>
+        <body>
+                <ul>
+                        <li>
+                                Delay computer player (By Ving)</li>
+                        <li>
+                                Smarter computer (By Ving)</li>
+                        <li>
+                                Make black/white selectable (By brother)</li>
+                        <li>
+                                New game automatically after one game is over (By brother)</li>
+                </ul>
+                </body>
+</html>

@@ -1,0 +1,581 @@
+1. Valid Palindrome
+Test cases:
+1. empty string
+2. string with one char
+3. non-Palindrome
+4. Palindrome
+
+bool isPalindrome(string s) {
+if (s.empty()) return true;
+int i = 0, j = s.length() - 1;
+while (i <= j) {
+    if (!isalnum(s[i])) {
+        i++;
+    } else if (!isalnum(s[j])) {
+        j--;
+    } else if (tolower(s[i++]) != tolower(s[j--])) {
+        return false;
+    }
+}
+return true;
+}
+
+2. Combination Sum
+dfs
+key variable
+target, pathValue, res, start
+how to record previous path?
+
+1. sort 
+2. dfs (target, pathValue, res, num)
+void dfs(vector<int> &num, int target, vector<vector<int> > &res, vector<int> &pathValue, int start) {
+    if (target == 0) {
+        res.push_back(pathValue);
+    } else if (target > 0) {
+        for (int i = start; i < num.size(); i++) {
+            if (num[i] > target) break;
+            pathValue.push_back(num[i]);
+            dfs(num, target - num[i], res, pathValue, i);
+            pathValue.pop_back();
+        }
+    }
+}
+
+How to remove duplicated??
+start index in nondecreasing order
+
+Combination sum II
+    void dfs(vector<int> &num, int target, vector<vector<int> > &res, vector<int> &pathValue, int start) {
+        if (target == 0) {
+            res.push_back(pathValue);
+        } else if (target > 0) {
+            int previous = -1;
+            for (int i = start; i < num.size(); i++) {
+                if (previous != num[i]) {
+                    pathValue.push_back(num[i]);
+                    dfs(num, target - num[i], res, pathValue, i + 1);
+                    pathValue.pop_back();
+                    previous = num[i];
+                }
+            }
+        }
+    }
+
+3. N-Queens
+array
+Q[0,1,..., n-1]
+Q[i]: location of i-th Queen
+
+while(row>=0) {
+place queen to the next slot
+isValid:
+not (if the last element, backtrace, recover the current slot value; ow next slot)
+yes (if row == n-1, save result, backtrace; ow row++)
+}
+
+isValid(table, arr, row)
+
+4. Pow(x, n)
+naive method
+multiply by n times
+
+divide by 2
+n odd:
+n positive
+Pow(x,n>>1)*Pow(x,n>>1)*x
+n negative
+Pow(x,n>>1)*Pow(x,n>>1)*(1/x)
+n even:
+Pow(x,n>>1)*Pow(x,n>>1)
+
+More efficient?
+
+Points of attention
+n<0
+>>1 and /2 are not identical (e.g. -1>>1, -1/2) because of the sign bit
+-1 % 2 == -1 not 1
+
+Refinement
+one if is enough for odd and even cases
+how to eliminate powSub?? consider positive and negative n when divide by two
+
+5. First Missing Positive
+1. naive method
+check position and all length
+O(n^2)
+
+2. hash_map
+Time: O(n), space: O(n)
+
+3. use index as natural hash_key
+a. assign A[i] < 0 || A[i] > n --> 0
+b. while (A[i] != 0 && A[i] != i + 1  && A[i] != A[A[i-1]] )
+A[i] should be placed at i-1
+array index
+0 1 2 3
+1 2 3 4
+value
+c. go through and check
+
+Refinement:
+1. use swap function
+2. try to use more and more lib functions
+
+6. Permutation
+void permuteSub(vector<int> &num, int start, vector<vector<int> > &res) {
+    int len = num.size();
+    if (start >= len - 1) {
+        res.push_back(num);
+        return;
+    }
+    for (int i = start; i < len; i++) {
+        // Swap with the first element
+        swap(num[i], num[start]);
+        permuteSub(num, start + 1, res);
+        // Swap back!
+        swap(num[i], num[start]);
+    }
+}
+
+7. Wildcard Matching
+Points of attention
+1. Initialization of the first position
+*: use up value
+not *: false, except the first time
+2. if number of nonstar in p is greater than lenS: return false (avoid time limit)
+3. return m[flag][lenS] instead of m[!flag][lenS]
+if (p[0] != '*') {
+    if (s[0] == p[0] || p[0] == '?') {
+        return isMatch(s+1, p+1);
+    } else {
+        return false;
+    }
+} else {
+    if (isMatch(s, p+1)) {
+        return true;
+    } else {
+        return isMatch(s+1, p);
+    }
+}
+
+8. Container With Most Water
+naive method
+check each pair
+n^2
+
+O(n)?
+
+use two pointers
+O(n)
+int maxArea(vector<int> &height) {
+    // Note: The Solution object is instantiated only once and is reused by each test case.
+    if(height.empty() || height.size() < 2) return 0;
+    
+    int i = 0, j = height.size() - 1;
+    int areaMax = 0;
+    while(i < j) {
+        int areaCur = min(height[i], height[j]) * (j - i);
+        areaMax = max(areaMax, areaCur);
+        if (height[i] > height[j]) {
+            j--;
+        } else {
+            i++;
+        }
+    }
+    
+    return areaMax;
+}
+
+9. Search Insert Position
+int searchBinary(int A[], int start, int end, int target) {
+    if (start >= end) {
+        if (target > A[start]) {
+            return start + 1;
+        } else {
+            return start;
+        }
+    }
+    int mid = (start + end)>>1;
+    if (A[mid] == target) {
+        return mid;
+    } else if (A[mid] > target){
+        return searchBinary(A, start, mid - 1, target);
+    } else {
+        return searchBinary(A, mid + 1, end, target);
+    }
+}
+
+10. Remove Duplicates from Sorted Array
+int removeDuplicates(int A[], int n) {
+    // Start typing your C/C++ solution below
+    // DO NOT write int main() function
+    if (n < 2) return n;
+    int i = 0, j = i;
+    while (++j < n) {
+        if (A[i] != A[j]){
+            A[++i] = A[j];
+        }
+    }
+    return i+1;
+}
+
+11. Remove Nth Node From End of List
+ListNode *removeNthFromEnd(ListNode *head, int n) {
+    // Start typing your C/C++ solution below
+    // DO NOT write int main() function
+    // Compute the list length
+    ListNode *fast = head, *slow = head;
+    ListNode *nodeToDelete = NULL;
+    for (int i = 0; i < n; i++) {
+        fast = fast->next;
+    }
+    if (!fast) {
+        nodeToDelete = head;
+        head = head->next;
+        delete nodeToDelete; 
+        return head;
+    }
+    while (fast->next) {
+        fast = fast->next;
+        slow = slow->next;
+    }
+    
+    nodeToDelete= slow->next;
+    slow->next = slow->next->next;
+    delete nodeToDelete;
+    return head;
+}
+
+12. Merge k Sorted Lists: ListNode *mergeKLists(vector &lists)
+HeapSort
+1. Treat it lists as a heap 
+2. merge on the original lists
+3. when one list is empty, reduce heapSize
+
+minHeap
+each time pick up the min one, add it to the tail
+
+1. build heap
+2. while heapSize is nonzero
+heap pop
+add to resList
+if next? add next and heapfy
+else heapSize--, lists.pop_back()
+
+Points of attention,
+Need to remove empty first
+default maxHeap, need redefine comp()
+need lists.pop_back(); when removing one element
+
+Refinement
+heapSize can be replaced by lists.size();
+
+13. 3Sum Closest
+sort and 3 pointers
+1. fixed the first one
+2. find closet use the rest of the two pointers 
+
+Time O(n^2)
+
+How to refine?
+1. no need to use gain, compare sum directly
+2. one sum variable is enough
+3. result: 29 lines -> 22
+int threeSumClosest(vector<int> &num, int target) {
+    // Start typing your C/C++ solution below
+    // DO NOT write int main() function
+    assert(num.size() >= 3);
+    sort(num.begin(), num.end());
+    int sum = num[0] + num[1] + num.back();
+    for (int i = 0; i < num.size() - 2; i++) {
+        int j = i + 1;
+        int k = num.size() - 1;
+        while (j < k) {
+            int sumTmp = num[i] + num[j] + num[k];
+            if (sumTmp == target) return sumTmp;
+            if (abs(sumTmp - target) < abs(sum - target)) sum = sumTmp;
+            if (sumTmp < target) j++;
+            else k--;
+        }
+    }
+    return sum;
+}
+
+14. Add Two Numbers
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+    // Start typing your C/C++ solution below
+    // DO NOT write int main() function
+    ListNode *head = NULL, *tail = NULL;
+    int carrier = 0;
+    while(l1 || l2 || carrier) {
+        int val1 = l1 ? l1->val : 0;
+        int val2 = l2 ? l2->val : 0;
+        int sum = val1 + val2 + carrier;
+        carrier = sum / 10;
+        sum %= 10;
+        ListNode *item = new ListNode(sum);
+        if (!head) {
+            // first node
+            head = item;
+            tail = head;
+        } else {
+            tail->next = item;
+            tail = tail->next;
+        }
+        l1 = l1 ? l1->next : l1;
+        l2 = l2 ? l2->next : l2;
+    }
+    
+    return head;
+    
+}
+
+15. Reverse Integer
+class Solution {
+public:
+    int reverse(int x) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        
+        int r = 0;
+        while (x) {
+            r = r*10 + x % 10;
+            x /= 10;
+        }
+        
+        return r;
+    }
+};
+
+16. Regular Expression Matching
+bool isMatch(const char *s, const char *p) {
+    if (strlen(p) == 0) {
+        return strlen(s) == 0;
+    }
+    
+    // Both not empty
+    if (p[1] != '*') {
+        if ((s[0] == p[0] || p[0] == '.') && s[0] != '\0') return isMatch(s+1, p+1);
+        else return false;
+    } else {
+        if (isMatch(s, p+2)) return true;
+        else {
+            if ((p[0] == '.' || s[0] == p[0]) && s[0] != '\0')return isMatch(s+1, p);
+            else return false;
+        }
+    }
+    
+}
+
+17. Merge Two Sorted Lists
+Merge Two Sorted Lists
+
+two pointers, merge the second one to the first one
+p1, p2
+p2 is small than p1, insert; ow p1++
+separate head out
+
+Points of attention
+1. l1Pre != NULL and !l1Pre are different
+2. insert and head operation need to be consistent
+ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+    
+    if (l2 == NULL) return l1;
+    if (l1 == NULL) return l2;
+    
+    // determine the head
+    ListNode *head;
+    ListNode *l1Pre = NULL;
+    ListNode *l2Pre = NULL;
+    l1->val < l2->val ? head = l1 : head = l2;
+    
+    while (l2 && l1) {
+        if (l2->val > l1->val) {
+            l1Pre = l1;
+            l1  = l1->next;
+        } else {
+            // insert 
+            if (l1Pre) {
+                l1Pre->next = l2;
+            }
+            l2Pre = l2;
+            l2 = l2->next;
+            l2Pre->next = l1;
+            l1Pre = l2Pre;
+        }
+    }
+    
+    if (l1 == NULL) {
+        l1Pre->next = l2;
+    }
+    return head;
+}
+
+18. Set Matrix Zeroes
+Testing:
+
+naive method
+use two matrices
+1. copy matrix to res
+2. go through and set zero
+
+Time: O(m*n(m+n)); space: O(m*n)
+
+store zero row and col
+use O(m+n) space
+Time O(m*n)
+
+use the first row and col to store the zero row and col info
+
+19. subsets && subsets II
+1. sort
+2. push empty set
+3. for S[i]
+copy current sets, and append S[i] to the copied ones
+
+Questions
+1. sort vector how? sort(v.begin(), v.end())
+
+subsets II
+Solution
+1. sort
+2. push empty set, lenPre = 0
+3. for S[i]
+a. not equal to S[i-1]
+copy current sets, and append S[i] to the copied ones
+update lenPre
+b. equal to S[i-1]
+copy the last lenPre member and append S[i] to them
+
+how to avoid duplicated sets with duplicated values
+1. append to those ending with the value? Not enough
+2. relation of append number with previous len?
+equal
+
+How to refine
+1. separate out the first two sets ([], [S[0]]) or add i==0 to the first if case
+2. combine two if's
+
+Points of attention
+1. lenPre initial value is 1! (if separate out the first two sets)
+
+        int startIndex = 0;
+        for (int i = 0; i < S.size(); i++) {
+            lenCur = res.size();
+            if (i == 0 || S[i] != S[i-1]) {
+                startIndex = 0;
+                lenPre = lenCur;
+            } else {
+                startIndex = lenCur - lenPre;                                                                                                                 
+            }
+            for (int j = startIndex; j < lenCur; j++) {
+                res.push_back(res[j]);
+                res.back().push_back(S[i]);
+            }
+        }
+
+20. Merge Sorted Array
+Questions:
+1. length of both array's? A has additional space
+2. where to store the result? merge B into A
+
+void merge(int A[], int m, int B[], int n) 
+
+Solution
+1. shift A with lenB
+2. 3 pointers
+
+Problems:
+1. A is empty? need to judge both in while (k < n && j < m + n - 1)
+2. Best way: from back to front, insert B into A
+void merge(int A[], int m, int B[], int n) {
+    // IMPORTANT: Please reset any member data you declared, as
+    // the same Solution instance will be reused for each test case.
+    // compare A[m-1], B[n-1], put larger one to A[m+n-1]
+    while (n > 0) {
+        if (m < 1 || A[m-1] < B[n-1]) {
+            // choose n-1
+            A[m+n-1] = B[n-1];
+            n--;
+        } else {
+            A[m+n-1] = A[m-1];
+            m--;
+        }
+    }
+}
+
+21. Interleaving String
+Recursively
+p1 == p3 && p2 == p3
+(p1+1, p2, p3+1) || (p1, p2+1, p3+1)
+p1 == p3
+(p1+1, p2, p3+1)
+p2 == p3
+(p1, p2+1, p3+1)
+
+Refinement
+how to gracefully combine different conditions
+use length as a condition
+
+Questions:
+time efficiency?
+DP:
+isInterleave(s1, s2, s3)
+length not equal false
+
+isInterleave(s1, s2, s3) = isInterleave(s1Sub, s2, s3Sub) || isInterleave(s1, s2Sub, s3Sub)
+dp across the matrix
+
+22. Palindrome Partitioning
+dfs(int start, string s, vector<string> &path, vector<vector<string> > res)
+1. already found p set before start, try to find p set since start
+2. check each partition
+3. s[start to i] is p, dfs the rest
+if not, next partition
+
+    void dfs(int start, string s, vector<string> &path, vector<vector<string> > &res) {
+        if (start >= s.length()) {
+            // find an answer
+            res.push_back(path);
+            return;
+        }
+        for (int i = start; i < s.length(); i++) {
+            string s1 = s.substr(start, i-start+1); // start to i                                                                                             
+            if (isP(s1)) {
+                path.push_back(s1);
+                dfs(i+1, s, path, res);
+                path.pop_back();
+            }
+        }
+    }
+
+Point of attention 
+pop_back after each dfs to recover 
+from start to string error: string s1 = s.substr(i, i-start+1); // start to i 
+vector res need to be reference
+
+23. Gas Station
+naive method
+check each station as starting point
+for each nod                                                                                                                                                  
+if(sum(g[0-i]) >= sum[c[0 to i]])
+
+Time: O(n^2)
+
+DP
+update index when is not positive, alway keep the first index that can keep positive all the time
+        int sumPositive = 0;
+        for(int i = 0; i < len; i++) {
+            int delta = gas[i] - cost[i];
+            sum += delta;
+            if (sumPositive > 0) {
+                sumPositive += delta;
+            } else {
+                sumPositive = delta;
+                index = i;
+            }
+        }
+
+        if (sum >= 0) return index;
+        return -1;
+

@@ -1,0 +1,76 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 16, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Palindrome Partitioning 
+						<pre>
+Palindrome Partitioning
+
+Questions
+1. what kind of chars do we have: all
+2. 
+
+Test cases
+1. empty
+2. one element
+3. normal
+"aab"
+
+f("aab") = f("aa") + f2("aa", "b")
+
+f(s) = f(s-1) + f2(s-1, s[i])
+f(i,j) = Sum{[f(i,k) + f(k,j)] && p(i,j) && p(j,k)}
+
+Solution
+DP
+  a  a  b
+a 1
+a    1
+b       1
+
+DFS
+aab
+0
+"" "aab"
+1
+"a", "ab"
+2
+"aa", "b"
+
+dfs(int start, string s, vector<string> &path, vector<vector<string> > res)
+1. already found p set before start, try to find p set since start
+2. check each partition
+3. s[start to i] is p, dfs the rest
+if not, next partition
+
+    void dfs(int start, string s, vector<string> &path, vector<vector<string> > &res) {
+        if (start >= s.length()) {
+            // find an answer
+            res.push_back(path);
+            return;
+        }
+        for (int i = start; i < s.length(); i++) {
+            string s1 = s.substr(start, i-start+1); // start to i                                                                                             
+            if (isP(s1)) {
+                path.push_back(s1);
+                dfs(i+1, s, path, res);
+                path.pop_back();
+            }
+        }
+    }
+
+Point of attention 
+pop_back after each dfs to recover 
+from start to string error: string s1 = s.substr(i, i-start+1); // start to i 
+vector res need to be reference
+
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

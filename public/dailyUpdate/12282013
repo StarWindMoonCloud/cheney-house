@@ -1,0 +1,108 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 28, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Max Points on a Line 
+						<pre>
+Questions
+1. distinct points? yes
+
+Test cases
+1. one point
+2. two points
+3. 3 or more points same line
+4. 3 or more points not same line
+
+Solutions
+1. one point -> 1
+2. two points -> 2
+3. more
+
+1. how to describe a line y=kx+b (k, b)
+2. how about vertical line? 
+
+linesFoundSet
+for each pair of points
+1. if it's not in linesFoundSet, go to 2, else next pair
+2. count number of points that is on the line
+
+O(n^3)
+
+Lots of repeated check whether a point is on a line or not
+actually a point can only be on one line
+
+maintain a map with number of points on the line
+map<Line, set<Point> >: key is found Line; value is found points 
+a point can be counted to multiple lines
+
+(x1, y1) (x2, y2) -> y=kx+b
+k*x1 + b = y1
+k*x2 + b = y2
+k = (y2-y1)/(x2-x1)
+b = (x1y2-x2y1)/(x1-x2)
+
+(y-y0)/(x-x0) = (y1-y0)/(x1-x0)
+
+Points of attention
+1. how about vertical line? Double infinity, b = x value
+2. if map/set key is object, at least need to overload ==, < also for map/set default (BST) implementation, map need to overload for pair
+3. Point as key, when define smaller, need to consider both x and y
+
+Problems
+1. it turned out they count duplicated points -> use a map to count "same points" first
+2. how to go through map with "+" and "-" operation on iterator
+3. prev? gcc version too old
+4. INFINITY should be replaced by "1/0.0"
+5. "Time Limit Exceeded"
+</pre>
+			</li>
+			<li>
+            Binary Tree Zigzag Level Order Traversal
+<pre>
+Testcase
+1. empty tree
+2. one node
+3. left/right child only
+4. normal tree
+
+Normal level order traversal
+1. use a queue
+2. while(!q.empty())
+3. dequeue top, visit, enqueue left and right child
+
+normal level order, reverse even level res
+1. need to know level start and level end (enqueue a null pointer)
+
+Steps
+1. init push root, push NULL, bool reverse = false
+2. while(!q.empty()) {
+    dequeue top
+    if == NULL {
+        if (reverse) {
+            reverse current result
+        }
+        flip reverse
+        save level result
+        push NULL to q
+    } else {
+        visit, enqueue left and right child
+    }
+    
+}
+
+level result variable reuse?
+clean vector?
+
+Points of attention
+1. termination condition?
+2. "reverse != reverse;" does not work since "!=" is reserved, should use "reverse = !reverse;"
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

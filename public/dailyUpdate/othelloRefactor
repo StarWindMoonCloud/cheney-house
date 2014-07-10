@@ -1,0 +1,18 @@
+<!DOCUMENTTYPE html>
+<html>
+        <head>
+                <title>Othello Refactor</title>
+        </head>
+        <body>
+                <ul>
+                        <li>
+                                separate out js, css code DONE</li>
+                        <li>
+                                replace duplicated code with common function DONE</li>
+                        <li>
+                                cleaner code DONE</li>
+                        <li>
+                                use constant for fixed variables</li>
+                </ul>
+                </body>
+</html>

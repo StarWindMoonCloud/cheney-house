@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" style=""><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><!--<![endif]--><head>
+		<meta charset="utf-8">
+		<title>Cheney's House</title>
+		<meta name="description" content="">
+		<!--<meta name="viewport" content="width=device-width">-->
+                <!--<meta name="viewport" content="width=device-width,initial-scale=1" />-->
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		
+
+		<!-- CSS -->
+		<link href="http://fonts.googleapis.com/css?family=Arvo:400" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/responsive.css">
+		
+</head>
+	<body>
+	
+		
+		<!-- WRAPPER -->
+		<div class="wrapper">
+		
+			<!-- HEADER -->
+			<header class="cf">
+			<ul class="horizontal">
+    <li style="float:left"><b id="title">Cheney's House</b>	</li>
+    <li>
+				<!-- social-bar -->
+				<ul id="social-bar" class="cf"><a href="index.html">
+					
+					
+					</a>
+  <li class="linkedin"><a href="http://www.linkedin.com/profile/view?id=46139535" title="Linked"></a></li>
+  <li class="facebook"><a href="https://www.facebook.com/qili.chen.14" title="Facebook"></a></li>
+					<li class="googleplus"><a href="https://plus.google.com/u/0/113754452788658070991" title="googleplus"></a></li>
+					<li class="twitter"><a href="https://twitter.com/CheneyChen_" title="twitter"></a></li>
+				</ul>
+				<!-- ENDS social-bar -->
+    </li>
+  </ul>	
+			</header>
+			<!-- ENDS HEADER -->
+			
+			<!-- NAV -->
+			<nav class="cf">
+				<ul id="nav" class="sf-menu sf-js-enabled sf-shadow">
+					<li class="current-menu-item" style="margin: 0 0 0 1.4%"><a href="index.html">HOME</a></li>
+					<li class=""><a href="travelInfo">Travel</a>
+					</li>
+					<li><a href="gameInfo">Games</a></li>
+					<li><a href="cookingInfo">Cooking</a></li>
+				</ul>
+                        </nav>
+			<!-- ENDS NAV -->
+			
+			
+			<!-- MAIN -->
+			
+			<!-- ENDS MAIN -->
+			
+			
+			<!-- WIDGETS -->
+			
+			<!-- ENDS WIDGETS -->
+			
+			
+			<!-- FOOTER -->
+			
+			<!-- ENDS FOOTER -->
+		
+		</div>
+		<!-- ENDS WRAPPER -->
+
+</body></html>

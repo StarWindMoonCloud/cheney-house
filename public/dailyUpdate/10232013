@@ -1,0 +1,85 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 23, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode refinement
+				<ul>
+					<li>   First Missing Positive
+						<pre>
+1. naive method
+check position and all length
+O(n^2)
+
+2. hash_map
+Time: O(n), space: O(n)
+
+3. use index as natural hash_key
+a. assign A[i] < 0 || A[i] > n --> 0
+b. while (A[i] != 0 && A[i] != i + 1  && A[i] != A[A[i-1]] )
+A[i] should be placed at i-1
+array index
+0 1 2 3
+1 2 3 4
+value
+c. go through and check
+
+Testing
+1. one elements
+0; 1
+2. duplicates
+1, 1
+3. normal
+[3,4,-1,1]
+[4,1,2,3] -> [3,1,2,4] -> [2,1,3,4] -> [1,2,3,4]
+
+Refinement:
+1. use swap function
+2. try to use more and more lib functions
+
+Points of attention
+
+Why the following swap does not work?
+A[i] ^= A[A[i] - 1];
+A[A[i] - 1] ^= A[i];
+A[i] ^= A[A[i] - 1];
+</pre>
+					</li>
+					<li>   Permutation
+						<pre>
+recursively
+p(n) = a1p(a2...an) + a2p(a1a3...an) + an*p(a1...a(n-1))
+p(arr, start, end, n)
+if (start == end) {
+print array
+} else {
+for (i = start; i < end; i++) {
+swap(a[i],a[start])
+p(arr, start + 1, end, n);
+swap(a[start],a[i])
+}
+}
+
+How to refine
+1. use swap function
+
+Key point
+1. when to print, when start == end
+2. starting point: start, not start + 1
+</pre>
+					</li>
+					<li> Permutations II 
+						<pre>
+swap only when they are not equal: that's not enough
+how to cover/proceed the first permutation
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

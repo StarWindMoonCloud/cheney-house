@@ -1,0 +1,34 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 17-18th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				Cracking the coding interview - review
+				<ul>
+					<li>
+						1.5 String compression - strCompression.cpp</li>
+					<li>
+						2.7 List palindrome</li>
+					<li>
+						3.7 Cat dog queue</li>
+					<li>
+						4.9 Print all path on a tree whose sum equals given value</li>
+					<li>
+						5.6 Swap odd and even bits</li>
+					<li>
+						6.4 How many days will it take the blue-eyed people to leave</li>
+					<li>
+						7.4 Use add to implement subtract, multiply, and divide</li>
+				</ul>
+			</li>
+			<li>
+				Paper</li>
+			<li>
+				Qili&#39;s homepage</li>
+		</ul>
+	</body>
+</html>
+

@@ -1,0 +1,29 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Game Othello</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<a href="09072013">Initial Design</a></li>
+			<li>
+				<a href="09162013">Next steps</a></li>
+			<li>
+				<a href="othelloRequirements">Game requirements/ideas</a></li>
+			<li>
+				<a href="09202013">Playable against computer - 1st try</a></li>
+			<li>
+				<a href="10042013">minmax algorithm learning and code refactor</a></li>
+			<li>
+				<a href="othelloMinMax">Othello Minmax Algorithm Implementation</a></li>
+			<li>
+				<a href="othelloRefactor">Othello Refactor</a></li>
+			<li>
+				<a href="othelloBugs">Othello Bugs</a></li>
+			<li>
+				<a href="othelloChallenges">Othello Challenges</a></li>
+		</ul>
+		</body>
+</html>
+

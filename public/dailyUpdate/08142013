@@ -1,0 +1,52 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 14th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				leetcode - Remove Duplicates from Sorted List
+				<ul>
+					<li>
+						Notes
+						<p>
+							two pointer<br />
+							p1, p2<br />
+							pAst<br />
+							init p1 p2<br />
+							<br />
+							while p2 != NULL<br />
+							if p2-&gt;val == p1-&gt;val<br />
+							p2 = p2-&gt;next<br />
+							pAst = p2<br />
+							delete pAst<br />
+							<br />
+							else // move both p1 p2<br />
+							p1 = p1-&gt;next;<br />
+							p2 = p2-&gt;next;</p>
+					</li>
+					<li>
+						Testing 1. empty 2. single node 3. normal 1-&gt;1-&gt;2 1-&gt;1-&gt;2-&gt;3-&gt;3
+						<p>
+							1. empty<br />
+							2. single node<br />
+							3. normal<br />
+							1-&gt;1-&gt;2<br />
+							1-&gt;1-&gt;2-&gt;3-&gt;3</p>
+					</li>
+					<li>
+						Points of attention
+						<ul>
+							<li>
+								Do not forget to connect the two nodes after deletion</li>
+							<li>
+								Is it necessary to change the next point to NULL before node deletion? No</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

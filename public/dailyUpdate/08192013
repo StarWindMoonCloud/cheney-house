@@ -1,0 +1,34 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 19th, 2013</title>
+	</head>
+	<body>
+		<ul>
+			Largest Rectangle in Histogram
+			<li>
+				Notes
+				<pre style="word-wrap: break-word; white-space: pre-wrap;">
+Record the index
+
+1. s.empty() || h[i] &gt;= top
+push(i)
+
+2. h[i] &lt; top
+</pre>
+			</li>
+			<li>
+				Points of Attention
+				<ul>
+					<li>
+						push condition (particular push when h[i] == top)</li>
+					<li>
+						Add 0 to the original vector</li>
+					<li>
+						i++ only when pushed to stack</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

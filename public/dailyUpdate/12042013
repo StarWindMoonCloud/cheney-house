@@ -1,0 +1,82 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 4, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Design a file system
+						<pre>
+Questions
+functionalities
+1. new/delete file/directory
+2. rename, cp, etc
+
+how many kinds of files?
+regular file, directory
+
+Core classes
+1. File --> Entry
+2. Directory --> Entry
+3. top level class, maintaining all the files (FileSystemManager : single instance)
+map<string, Entry>
+
+Relationship
+Directory is a special file
+FileSystemManager has all the files info, starting from root directory, providing necessary api's
+
+Actions
+1. new/delete
+2. rename
+
+class Entry {
+    void setPath(string path);
+    void getPath();
+    void setName(string name);
+    void rename(string name);
+private:
+    string name;
+    string path;
+}
+
+class File : public Entry {
+public:
+    string getDirectory();
+    File(string name, string path);
+private:
+    Entry *parent;
+}
+
+class Directory : public Entry {
+    void addFile(Entry *);
+    void addDirectory(Entry *);
+    bool hasFile(string name);
+private:
+    Entry *parent;
+    map<string, Entry*> itemMap;
+}
+
+class FileSystemManager{
+public: 
+    bool createFile(string name, string path);
+    bool createDirectory(string name, string path);
+    void list(string path);
+    FileSystemManager* getInstance();
+private:
+    map<string, Entry*> rootFiles;
+    string name;
+    FileSystemManager(string name);
+    FileSystemManager *fs;
+}
+
+Questions:
+1. do we really need FileSystemManager?
+2. FileSystemManager single instance??
+3. Directory class itemMap?
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

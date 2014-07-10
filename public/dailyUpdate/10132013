@@ -1,0 +1,64 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 13, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode refinement
+				<ul>
+					<li>   Remove Duplicates from Sorted Array
+						<pre>
+1 1 1 1 2 3 3 4
+two pointers: i, j
+a. A[i] == A[j]
+j++
+b. A[++i] = A[j++]
+
+return i
+
+Refinement
+one if is enough (reducing two lines), put a into while
+</pre>
+					</li>
+					<li>   Divide Two Integers
+						<pre>
+Treat as two binary number (dividend, divisor), treat sign separately, pay attention to overflow.
+1. abs(dividend) < abs(divisor): 0
+2. bit by bit
+a. bitsDividend, bitsDivisor
+i = (bitsDividend - bitsDivisor)
+b. shift dividend by i
+c. start dividing
+get the lowest bitsDivisor
+numCur = (lowest bitsDivisor) + (carrier << 1)
+i. res, carrier,
+resCur = (numCur+carrier) > divisor ? 1 : 0
+res = res << 1 + resCur;
+carrier = numCur+carrier-divisor
+i--
+
+Refinement
+shift divisor closet to dividend
+update res and dividend
+a. res = res | 1<<pos
+b. dividend = dividend - (divisor<<pos)
+
+sign judgement refine?
+Use XOR
+
+Point of attention
+dividend_abs update: dividend_abs -= (1 << pos); instead of  dividend_abs -= (divisor_abs << pos);
+cover equal case: instead of while ((divisor_abs << pos) < dividend_abs) {  
+abs may overflow, should use:
+long long dividend_abs = abs((long long) dividend);
+long long divisor_abs = abs((long long) divisor);
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

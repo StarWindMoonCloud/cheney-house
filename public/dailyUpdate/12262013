@@ -1,0 +1,73 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 26, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Reorder List 
+						<pre>
+Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+Test cases
+1. empty list
+2. one element
+3. two elements
+1->2
+1<-2
+4. several elements
+
+naive method
+insert Ln bt L0, L1
+insert L(n-1) bt L1, L2
+
+O(n^2)
+
+check index
+0,1,2,3,...,n
+0,n,1,n-1,....,
+0,1,2,...,n/2: first half
+n,n-1,....,n/2+1: second half
+
+Two pointers
+1. p1 at the beginning, p2 at n/2+1
+2. reverse list of p2
+3. insert p2 into p1
+1
+1->2
+1->2->3
+
+1->2 3
+p1, p2
+p1Next, p2Next
+1. p1->next = p2
+2. p2->next = p1Next
+3. update p1, p2, p1Next, p2Next
+
+reverse
+<-1 2->3
+pPre(1), pCur(2), pNext(3)
+1. pCur->next = pPre
+2. update pPre, pCur, pNext
+
+Points of attention
+1. break two lists before reversing the second part
+2. p2 = p2->next->next; may result in null p2 for p2->next judgement
+
+Refinement
+1. insert, one only more pointer is enough
+1->2 3
+p1, p2
+
+0. save p2->next
+1. p2->next = p1->next
+2. p1->next = p2
+3. update p1, p2
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

@@ -1,0 +1,30 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 9, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode refinement
+				<ul>
+					<li>   3Sum Closest 
+						<pre>
+sort and 3 pointers
+1. fixed the first one
+2. find closet use the rest of the two pointers 
+
+Time O(n^2)
+
+How to refine?
+1. no need to use gain, compare sum directly
+2. one sum variable is enough
+3. result: 29 lines -> 22
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

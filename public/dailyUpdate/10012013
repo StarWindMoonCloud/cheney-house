@@ -1,0 +1,284 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 1, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review
+				<ul>
+					<li>
+						Merge Two Sorted Lists
+						<pre>
+Merge Two Sorted Lists
+
+Testing
+1. two empty lists
+2. one empty: 
+3. normal 
+l1 1 4 5
+l2 2 3
+l1 1 2 4 5
+l2 3
+
+l1 2 3
+l2 1 4 5
+l1 1 2 3
+l2 4 5
+
+two pointers, merge the second one to the first one
+p1, p2
+p2 is small than p1, insert; ow p1++
+separate head out
+
+l1, l1->next
+l2, l2->next
+
+l1 2
+l2 1
+
+Points of attention
+1. l1Pre != NULL and !l1Pre are different
+2. insert and head operation need to be consistent
+</pre>
+					</li>
+					<li>
+						Plus One
+						<pre>
+digits plus one
+treat both as binary
+
+Testing:
+1. empty
+2. 0
+3. 9
+4. normal 123, 199
+
+which is the least significant one??
+suppose the rightest one --> leftmost one
+
+perform plus
+carrier+current, update currier
+
+insert if carrier is not zero
+
+Points of attention:
+Use old value!
+How to treat begin()
+</pre>
+					</li>
+					<li>
+						Climbing Stairs 
+						<pre>
+f(i): from 1 to i
+
+f(n)
+
+f(0)=0
+f(1)=1
+f(2)=2
+f(3)
+
+f(n) = f(n-1) + f(n-2)
+
+Fibonacci
+
+DP
+vPre, vCur
+</pre>
+					</li>
+					<li>
+						Set Matrix Zeroes
+						<pre>
+Testing:
+1. one element
+2. one row (1 1 0 1)
+3. one col
+1
+1
+0
+1
+4. normal
+1 1 0 1
+1 1 1 1
+1 0 1 1
+
+naive method
+use two matrices
+1. copy matrix to res
+2. go through and set zero
+
+Time: O(m*n(m+n)); space: O(m*n)
+
+use O(m+n) space
+Time O(m*n)
+
+space O(n)
+current position <row, col> == 0
+set the whole zeros, skip the row, record col 
+
+in place
+Use a special value (what are matrix values?)
+current position <row, col> == 0
+set the whole zeros, skip the row, set col value as -1
+for each of the -1 values, set them to 0
+But "Output Limit Exceeded"
+</pre>
+					</li>
+					<li>
+						Minimum Window Substring
+						<pre>
+S = "ADOBECODEBANC"
+T = "ABC"
+"BANC"
+
+Testing:
+1. not found
+"ADOB"
+"AC"
+
+2. found
+"ADCB"
+"AC"
+
+S = "ADOBECODEBANC"
+T = "ABC"
+
+Question: any duplicate in T? suppose no
+
+naive method
+for each length greater then lenT, check if it is
+time: O(m^2*n)
+
+DP:
+
+two pointers, hash to record the count of the pattern, if it's greater than 1, we can try to reduce len
+countMap
+1. find the first candidate/len, update countMap
+S = "ADOBECODEBANC"
+T = "ABC"
+"ADOBEC"
+
+2. if noway to further reduce the len of the candidate, move forward
+else reduce length
+
+Overall framework
+a. find the first candidate, p1, p2; found? for each element: countMapCur >= countMapGoal
+b. while (p2 != null) {
+if (count == lenT) {
+
+} else {
+
+}
+}
+
+Points of attention
+1. advance i need to update minStart, etc as well
+2. need to update countMapCur when advance j
+3. may be able to further reduce when j reaches to the end 
+4. countMapCur is guarantee to updated
+</pre>
+					</li>
+					<li>
+						Word Search
+						<pre>
+Testing
+1. false
+[
+  ["ABCE"],
+  ["SFCS"],
+  ["ADEE"]
+]
+"ABCB"
+
+flag
+1 1 1 0
+0 0 0 0
+0 0 0 0
+
+2. true
+["a"]
+a
+
+two pointers, flag matrix
+p1 
+p2 (word)
+
+checkBoard(vector<vector<char> > &board, vector<vector<int> > &flag, string word, int row, int col)
+a. match the char, advance (checkBoard: right, down, left, up), mark flag
+checkBoard(board, flag, wordNew, row+1)
+remove flag
+b. ow advance with same word
+c. terminate
+i. invalid row, col-> false;
+ii. empty word->true;
+
+Points of attention
+1. need to check all position
+2. if (word.length() == 0) return true; should be placed before the col, row check
+</pre>
+					</li>
+					<li>
+						Remove Duplicates from Sorted List (II)
+						<pre>
+Testing
+1. empty
+2. one element
+3. no duplicates 1->2->3
+4. with duplicates 1->1->2->3->3
+
+Sorted List
+two pointers
+cur == pre, delete cur
+cur != pre, update pre
+update cur
+
+9:40pm
+Remove Duplicates from Sorted List II 
+1. empty
+2. one element
+3. no duplicates 1->2->3
+4. with duplicates 1->1->2->3->3
+1->1
+
+three pointers 
+pPre, pCur, pNext
+pCur == pNext: delete 
+
+dupPre, dupStart, dupEnd
+pPre, pCur, pNext
+
+pCur == pNext: 
+
+duplicate happen when?
+pPre, pCur, pNext
+happen: 
+pPre != pCur == pNext
+delete pCur, update pCur, pNext
+end: 
+pPre == pCur != pNext
+delete pPre, pCur, update pPre, pCur, pNext
+
+naive method
+pPre, pCur
+pStart, pEnd
+delete, update pPre, pCur
+
+Points of attention
+1. the last part of duplicates
+2. undefined and NULL are different, when deleted, assigned it NULL (pPre = NULL;)
+3. pPre = pStartPre when deleted
+</pre>
+					</li>
+					<li>
+						Word Search
+						<pre>
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

@@ -1,0 +1,78 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 22, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Word Break II 
+						<pre>
+Test case
+1. empty str
+2. one choice
+"cat", "cat"
+3. normal case
+
+dfs(int start, string s, vector<string> &words, vector<string> res) 
+suppose substr 0 to start-1 sentences are found, try to find the rest from start
+
+for (int i = start; i < len; i++) {
+    substr: start-i
+    if (substr in dict)
+        push
+        dfs
+        pop
+    
+}
+
+Last space
+
+Problem
+1. "Time Limit Exceeded" 
+						</pre>
+			</li>
+			<li> Word Break && Word Break II
+<pre>
+Word Break
+Test cases
+1. empty
+2. one word
+"cat"
+"cat"
+3. others
+
+recursively
+len == 0 -> true
+find all possible substr in dict
+    check the rest
+
+Refinement
+1. starting from longer one
+
+DP
+f(i): value of string with length i (0 to i-1)
+f(0): true
+f(i): any of them is true, f(j) && s[i-j-1,i] in dict, j: 0 to i-1
+
+Points of attention
+Starting point of s, should be s[j to i] not s[i-j-1,i]
+
+Word Break II
+Dfs+Dp
+
+dfs
+for each substring (from start to len - 1), check whether it's breakable first
+dp[start]
+
+dp
+f(i): value of string with length i (i to len-1)
+f(len): true
+f(i): any of them is true, f(j) && s[i,j-1] in dict, j: len to i+1
+
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

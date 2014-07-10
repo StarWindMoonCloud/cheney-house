@@ -1,0 +1,129 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Nov 20, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Design elevator system (http://www.mitbbs.com/article3/JobHunting/31510323_0_tn.html)
+						<pre>
+Questions:
+1. user case
+Office building
+2. traffic
+not heavy; 10 per minute
+3. Each floor, how many panels? one first
+
+Define core classes
+Elevator, Controller, Panel, Passenger
+Floor
+
+Relationship between classes
+1. Each elevator has a panel
+2. Controller has N Elevator's
+Controller has K Floors
+3. Each floor has M panels
+4. Passenger
+
+Actions
+Elevator
+status: stopped, going up, going down
+accept request from Controller
+variables: destination, status, full/empty, limit
+
+Controller
+listen to panels of all the floors
+schedule a request
+
+Panel
+send request to Controller
+
+Passenger
+issue a request
+
+
+1. handle ambiguity
+2. Core classes
+3. Relationship
+4. Actions
+
+Define classes
+
+class Panel {
+public:
+    bool issueRequest(int direction); // send request to controller
+    void listen();
+private:
+    int elevatorNo; // -1 if belongs to a floor
+    int floorNo; // -1 if belongs to an elevator
+    int panelId;
+}
+
+class Passenger {
+public:
+    pickMeUpForDown(Panel &p); // issue an request to Controller
+    pickMeUpForUp(Panel &p);
+private:
+    string name;
+}
+
+class Elevator {
+public:
+    void moveUp(int from, int to)
+    void moveDown(int from, int to);
+private:
+    int status;
+    int floor;
+    int passengerNo;
+    queue<Action> actionQueue;
+}
+
+class Controller {
+public: 
+    appendAction(Elevator &e, Action &a);
+    schedule(); // match command with actions
+    listen();
+private:
+    Elevator elevators[N];
+    Panel panels[M];
+}
+
+class Action {
+public: 
+    enumDirection getDirection();
+    int getDstFloor();
+    void setDirection();
+    void setDstFloor();
+private:
+    enumDirection d;
+    int dstFloor;
+}
+
+Go through one case:
+1. Passenger -> pickMeUpForUp(p);
+2. Panel p (listen), accept the request and issueRequest(up);
+3. Controller accept the request and schedule
+a. check status of all (partially) the elevators (how to be more efficient, status queues (for each status there's a queue)? how to choose the best candidate)
+b. append command to the chosen candidate
+c. controller are done
+
+Elevator part
+while(!actionQueue.empty()) {
+pick up task from queue 
+execute task
+}
+(check strategy??)
+
+Questions
+communication? Connection between controllers and panels
+Furthermore, multithread issue
+capsulation
+how to listen
+visually draw
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

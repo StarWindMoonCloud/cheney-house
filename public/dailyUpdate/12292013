@@ -1,0 +1,79 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 29, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Construct Binary Tree from Inorder and Postorder Traversal 
+						<pre>
+Testcases
+1. empty tree
+2. one node
+1; 1
+3. left/right child only
+        1
+    2
+3
+321, 321
+
+1
+    2
+        3
+123, 321
+4. normal
+
+        1
+    2       3
+4         5
+
+Inorder: 4 2 1 3 5
+Postorder: 4 2 5 3 1
+
+Recursively
+1. find out root (the last of postorder)
+2. left: first part of inorder; right: second part of inorder
+3. postorder left: same number of first part
+
+To avoid space copy, use
+buildTreeSub(vector<int> &inorder, int inorderStart, vector<int> &postorder, int postorderStart, int len)
+len <= 0
+return NULL
+1. rootValue = postorder[postorderStart+len-1]
+2. inorderStartLeft = inorderStart, lenLeft, getIndex(vector<int> &v, int start, int len)
+postorderStartLeft = postorderStart, lenLeft
+3. inorderStartRight = rootValue index + 1, lenRight = len - lenLeft - 1;
+postorderStartRight = postorderStart + lenLeft, lenRight
+
+Problem:
+Memory Limit Exceeded
+</pre>
+			</li>
+			<li>
+            Convert Sorted List to Binary Search Tree
+<pre>
+Questions
+1. space/time complexity? space: O(c), time O(n)
+
+Testcases
+1. empty
+2. one node
+3. two nodes
+4. more nodes
+
+Solution
+recursively construct
+use sub to avoid repeatedly len computation
+
+TreeNode * sortedListToBSTSub(ListNode *head, int len)
+1. len < 1: NULL
+2. rootIndex: len>>1
+leftIndex: 0, leftLen: len>>1
+rightIndex: rootIndex + 1, rightLen: len - leftLen - 1;
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

@@ -1,0 +1,257 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 20-21, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode review (8 problems)
+				<ul>
+					<li>
+						Divide Two Integers
+						<pre>
+dividend, divisor
+
+a. count
+1. compare abs
+dividend_abs, divisor_abs
+a. dividend_abs &lt; divisor_abs: 0
+
+2. compute sign
+
+3. minus divisor_abs and count
+
+b. mimic the way we learned to do divide
+1. compare abs
+dividend_abs, divisor_abs
+i. dividend_abs &lt; divisor_abs: 0
+
+2. compute sign
+
+3. divide
+i. from most significant to least significant bits
+ii. for each bits (same length with divisor_abs), do divide(together with reminder)
+iii. update dividend_abs, res.
+
+Points of Attention
+Time complexity: 2147483647, 1? 
+reminder (&lt;&lt;1) need to be shifted before addition
+
+</pre>
+					</li>
+					<li>
+						Longest Valid Parentheses
+						<pre>
+(()
+)()())
+)(()())
+
+mark &quot;)&quot; as -1, &quot;(&quot; as 1, find the longest so that the sum is 0
+1. naive method, check all the possible pair: O(n^3)
+2. each right parentheses, find the matching left right parentheses and mark, find out the longest continuous marks: O(n^2)
+
+from right to left, find out all the valid pairs
+</pre>
+					</li>
+					<li>
+						Search Insert Position
+						<pre>
+1. compare with each element 
+a. equal: return index
+b. greater than: move forward
+c. small than: return index - 1
+
+Points of attention
+target is greater than all the elements, return?
+</pre>
+					</li>
+					<li>
+						Count and Say
+						<pre>
+1211
+
+1. from 1-n, generate from the previous res
+a. go through element 
+b. same char, count
+c. different: add to res, count 1 for the new char
+</pre>
+					</li>
+					<li>
+						First Missing Positive
+						<pre>
+1. hash (%n) positive number
+Time O(n), Space O(n)
+a. <key, value>: key element value (%n), value is index 
+b. map array value to [0,n-1]
+c. check the map: [1, 2, 3, etc] 
+
+Problem: can not distinguish 1 with n+1, if we assume all the elements are distinct, it's ok
+
+2. sort
+Time O(nlgn)
+
+3. use index as the natural hash
+Time O(n), Space constant
+index
+0->0, n
+1->1, n+1
+2->2, n+2
+
+[1,2,0]
+[1,2,0]
+
+[3,4,-1,1]
+[3,4,0,1]
+[0,4,3,1]
+[0,4,3,1]
+[0,1,3,4]
+
+[1,0,3,4]
+
+a. assign nonpositive and greater than n values to 0
+b. for each nonzero element, A[i]<->A[A[i]-1] until A[i] is zero/equal to i+1
+c. return the first zero met
+
+What if there's duplicates [2,2]?
+What if A can not be changed?
+
+Points of attention:
+be careful of A[i]-1 as index, it would change
+</pre>
+					</li>
+			<li>
+				Wildcard Matching
+				<pre>
+recursively
+
+current char
+0. termination condition
+one of them is zero: s 0, p * true; ow false
+both zero: true
+1. p[0] != &#39;*&#39; &amp;&amp; (s[0] == p[0] || p[0] == &#39;.&#39;)
+return isMatch(s+1, p+1);
+2. p[0] == &#39;*&#39;
+isMatch(s, p+1) || isMatch(s+1, p)
+
+Good practice
+Time Limit Exceeded--&gt; check isMatch(s+1, p) only when isMatch(s, p+1) is false
+Points of attention
+1. s empty, p[0]=='*'?
+
+DP
+a. create a (lenP+1)*(lenS+1) matrix m
+b. initialize first row and column
+c. row by row filling
+i. p[i] != '*'
+if (p[i] == a[j] || p[i] == '?') copy m[i-1][j-1]
+else F
+ii. p[i] == '*'
+check m[i-1, 1 To j], m[i, 1 To j-1]
+true if any of the above is true
+
+Points of attention
+matrix size?
+use two rows matrix only
+Time Limit Exceeded: 
+a. how to reduce one loop, check if p[i] == '*' first
+b. flag: no need to copy, only need to change flag
+c. need to actually consider up and left
+
+TODO
+why my DP solution is not efficient enough
+</pre>
+			</li>
+
+				</ul>
+			</li>
+			<li>
+				Startup engineering</li>
+			<li>
+				Game
+				<pre>
+play with computer
+isOver()
+who&#39;s turn
+
+If one has no way to go
+
+Computer go:
+1. go through the table
+2. pick an valid step and place piece (first one)
+Highlight the step of computer
+
+Availability and isOver
+After player's step:
+
+a. checkAvailable
+i. yes
+if computer's turn, place-> checkAvailable
+else no action
+ii. no 
+exchangeTurn-->checkAvailable
+if previous no, gameOver
+
+overMsg
+1. count the number of each color
+2. alter the winner
+
+Problem solved 
+exchangeTurn() will not wait placePieceComputer() when timeout is set to placePieceComputer--> eliminate timeout
+
+TODO
+How shall computer place piece (easy/medium/hard)
+how to include pause of computer action synchronously 
+</pre>
+			</li>
+			<li>
+				facebook learning
+				<ul>
+					<li>
+						Note from HR (phone)
+						<pre>
+1. Interview process (focus on backend first: multiple team)
+2. 1st phone interview? 
+3. Long holiday...
+4. openings
+5. recruiting event in China
+6. what shall I prepare
+7. my interests: ml, mobile web, games
+
+multiple team:
+1. coding
+2. large scale design &amp; architect
+
+Interview process
+1. first phone interview (algorithm/data structure, bugfree)
+2. second phone interview (November, December)
+3. January (onsite: China)
+
+from which interview 
+
+what to prepare:
+email
+notify interview time 4 days advance 
+</pre>
+					</li>
+					<li>
+						TODO
+						<ul>
+							<li>
+								check with Jiahui about backend interview questions, thank you letter..., how google doc, interview time/number of questions?</li>
+							<li>
+								Start contacting Amazon, Jawahar&#39;s company</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				preparation based on resume</li>
+			<li>
+				backup website content</li>
+			<li>
+				coding style</li>
+		</ol>
+	</body>
+</html>
+

@@ -1,0 +1,78 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Nov 30, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode question
+				<ul>
+					<li>  Interleaving String 
+						<pre>
+Questions
+Test case
+1. empty string
+"", "a", "a"/"b"
+2. len different
+"a", "ab", "ac"
+3. normal
+a. true case
+"a", "ab", "aba"
+b. false case
+
+len(s3) = len(s1) + len(s2)
+s3 = insert s2 into s1
+insert order can be arbitrary
+
+s3 - s1 == s2 not right
+
+3 pointers
+p1, p2, p3
+
+all empty true
+p3 empty false
+p1 || p2 empty, check the other with p3
+p1 != p3 && p2 != p3 false
+p1 != p3 && p2 == p3 p2, p3 move forward
+p1 == p3 && p2 != p3 p1, p3 move forward
+p1 == p3 && p2 == p3: trick part
+
+length not equal false
+p3 empty true
+p1 or p2 empty, compare with the other string
+check the first character of them
+p1 == p3 && p2 == p3
+check both
+p1 == p3, move forward
+p2 == p3, move forward
+else, false
+
+aabcc
+dbbca
+aadbbcbcac
+
+Recursively
+p1 == p3 && p2 == p3
+(p1+1, p2, p3+1) || (p1, p2+1, p3+1)
+
+Refinement
+how to gracefully combine different conditions
+use length as a condition
+
+Questions:
+time efficiency?
+DP:
+isInterleave(s1, s2, s3)
+length not equal false
+
+isInterleave(s1, s2, s3) = isInterleave(s1Sub, s2, s3Sub) || isInterleave(s1, s2Sub, s3Sub)
+dp across the matrix
+</pre>
+					</li>   
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

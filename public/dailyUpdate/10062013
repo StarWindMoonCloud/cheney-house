@@ -1,0 +1,85 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Oct 6, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode refinement
+				<ul>
+					<li>   Add Two Numbers 
+						<pre>
+copy the longer list and do addition to it
+put all together(copy the reminder of the longer list, do not forget the last carrier, normal sum)
+
+
+Points of attention:
+!NULL == true? yes; NULL == false? yes
+</pre>
+					</li>
+					<li>Reverse Integer
+						<pre>
+bit by bit
+overflow 
+1. 199 -> 991, the higher bit is neglect
+2. -128, convert to unsigned int
+positive and negative can be combined together
+</pre>
+					</li>
+					<li>Regular Expression Matching
+						<pre>
+isMatch("aa", "a*")
+check p+1
+not *
+*
+
+isMatch(s, p)
+termination
+len(p) == 0
+1. both 0 true
+2. else false
+
+check p+1
+1. not *
+check s[0], p[0]
+2. *
+isMatch(s, p+2) || (isMatch(s+1, p) && s[0] == p[0])
+else 
+false
+
+if (strlen(s) == 0) {
+    return true;
+} else {
+    return false;
+}
+==>
+return strlen(s) == 0;
+
+Points of attention
+"" "a*" are matched
+need to check if s[0] == '\0' before proceeding with s+1
+</pre>
+					</li>
+					<li>Roman to Integer 
+<pre>
+combine cur<0 and cur>=0 switch
+combine letter cases by using a map, s[i] < s[i+1] ==> -1 *
+further refine: from the end to start, no need to check i + 1 range
+
+<I, 1>
+<V, 5>
+<X, 10>
+<L, 50>
+<C, 100>
+<D, 500>
+<M, 1000>
+
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

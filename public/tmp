@@ -1,0 +1,29 @@
+0 0 0 0 0
+1 1 1 1 1
+1 1 1 1 1 
+0 0 1 1 1
+1 1 1 1 1
+
+naive method
+for each valid <point, width, height>, check if it's all one,
+if yes, update maxArea
+(x,y), width, height : (m*n)^3
+
+advanced method
+reduce it to one dimension
+0 0 0 0 0
+1 1 1 1 1
+2 2 2 2 2 
+0 0 3 3 3
+1 1 4 4 4
+find the max are given the one dimension data
+
+
+1 1 4 4 4
+for i-th element
+suppose hight = v[i]
+what's the max width?
+
+== or going up: w++, update preh
+going down: calculate the preMaxArea, w=1, 
+0 encountered: 

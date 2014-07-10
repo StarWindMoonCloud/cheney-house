@@ -1,0 +1,62 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Dec 27, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				LRU Cache 
+						<pre>
+Questions
+1. how to specify capacity? constructor
+2. time/space complexity? time: get and set both O(1), space O(n)
+3. key/value type? int
+4. in memory? yes
+5. definition of LRU? throw oldest last usage
+
+Test case
+1. capacity 0
+2. capacity 1
+3. capacity 2 or more
+
+Solution
+1. map?
+get: O(1)
+set: no info for LRU
+
+2. list
+get: O(n)
+set: O(n)
+LRU: when used, move to head
+Doubly linked list
+
+3. map+list
+map: key/value info, list: maintain LRU
+get: check if the key is in map, if no return false, ow update list, return value
+set
+check if the key is in map? yes->set, no then
+reach capacity? no->add one element, yes then
+remove the last element in list, further remove it from map (need to know the key), add one element
+
+move to head
+1->2
+1<-2
+1. separate out the node
+2. move to head
+
+Check other's implementation and see if any improvements available
+
+Points of attention
+1. addAsHead need to consider the pre pointer as well (as it's doubly linked list)
+2. moveToHead when isolate the node, make pre and next point to NULL
+3. moveToHead,it's possible node->next->pre is NULL
+4. always check if pointer could be NULL
+5. moveToHead need to update tail if necessary
+6. removeTail need to make the new tail next point to NULL
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

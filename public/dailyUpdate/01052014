@@ -1,0 +1,117 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Jan 05, 2014</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Best Time to Buy and Sell Stock
+						<pre>
+Testcase
+1. one element
+2. two elements
+1 2
+3. more
+2 1 3, 4 1 2
+
+Naive method
+check all pairs pair(i,j) j>i, find max(p[j] - p[i])
+O(n^2)
+
+DP
+f(i) = max profit for p[0 to i]
+f(i-1) = max profit for p[0 to i-1], bestPair <m,n>
+f(i) =
+if (p[i] > p[n]), p[i] - p[m], bestPair <m, i>
+else
+max(f(i-1), p[i] - p[j]), j = n+1 to i-1, if > f(i-1), update bestPair as well
+
+Still O(n^2) with less constant factor
+Problem
+1. it's not correct, e.g. 1,5,0,6; need to check p[i] - p[j]) (j = n+1 to i-1) no matter what
+
+find min value index and max value index, if indexMin < indexMax found answer
+else
+
+Sort?
+class Item {
+    int val
+    int index
+}
+sort items by value
+two pointers (i, j)
+if index j > index i found
+ow, i++/j-- depends on which can keep larger gap
+
+Problems
+1. not correct, e.g. [4,1,2]
+
+for the best pair (i,j), i is the smallest value among 0 to j elements
+Always keep the min value and maxProfit found when proceeding
+1. init, min = first element, maxProfit = 0
+2. for i-th element
+minPrice = min(minPrice, prices[i]);
+maxProfit = max(maxProfit, prices[i] - minPrice);
+</pre>
+			</li>
+			<li>  Best Time to Buy and Sell Stock II
+<pre>
+whenever there's profit make transaction
+1. init, profit 0, buy = first element
+2. for i-th item
+if p[i] > buy
+profit += p[i] - buy
+buy = p[i]
+
+may not be correct, e.g.  3 1 4
+
+Item {
+    int val
+    int index
+}
+
+Sort item by val
+starting from the items[0], check all the item whose index and value are greater than the previous ones
+indexPre = items[0].index;
+for (i = 1; i < len; i++) {
+    if (items[i].index > indexPre && items[i].value > prices[indexPre]) {
+    profit += items[i].value - prices[indexPre]
+    indexPre = items[i].index
+    }
+}
+
+May not be correct, e.g. 3 7 1 4
+
+Check all the consecutive, whenever profitable 
+</pre>
+			</li>
+			<li>  Best Time to Buy and Sell Stock III
+<pre>
+Test cases
+1. one element
+1
+2. two elements
+1 2
+3. more
+2 1 3 4, 4 1 2
+1 4 2 3
+
+find best choice with only transaction <m,n>
+find another best choice, starting from n
+
+Problem
+1. not correct, two media sum may be greater than one small and one big. [6,1,3,2,4,7]                              
+
+some of two best transactions at some point
+prices[0 to i] ==> forward best, prices[i to len-1] ==> backword best
+for all i record both forward best and backword best, and find the max sum
+
+forward, as in problem one
+backword
+</pre>
+			</li>
+		</ol>
+	</body>
+</html>
+

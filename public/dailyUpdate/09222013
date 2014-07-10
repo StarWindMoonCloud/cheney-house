@@ -1,0 +1,63 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 22, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review
+				<ul>
+					<li>
+						Permutations II
+						<pre>
+\Permutations
+recursively
+
+f(a1,a2,...,an) = a1*f(a2,...,an) + a2*f(a1,a3,...,an) + an*f(a1,a2,...,a(n-1))
+
+a1,a2,...,an
+
+a1,a2,a3
+a1,a3,a2
+
+a2,a1,a3
+a2,a3,a1
+
+a3,a2,a1
+a3,a1,a2
+
+f(a1,a2,...,an)
+if length 1, return vector with one element
+i=1-n
+0. swap a1 with ai
+1. a1*f(a2,...an)
+2. swap back a1, ai
+
+Points of attention:
+when to update res??
+avoid ^ self
+
+Need permuteSub(vector<int> &amp;num, vector<vector<int> &gt; &amp;res, int len): add res only for given len
+permute
+permuteSub(vector<int> &num, int depth, vector<vector<int> > &res)
+when depth equals to len,
+put num into res
+
+Points of attention 
+Be careful of which element to exchange (the first one the current array)
+Swap Back!
+
+Permutations II 
+execute Sub only once when equal
+
+TODO
+why would it "Output Limit Exceeded" if I do not use set? -> This is correct answer, will have duplicated answers ow. e.g. [1, 2, 2]
+</vector<int></int></pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

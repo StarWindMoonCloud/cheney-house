@@ -1,0 +1,611 @@
+<!DOCUMENTTYPE html>
+<html>
+    <head>
+        <title>Jan 1st, 2014 (review 12192013-12312013)</title>
+    </head>
+    <body>
+        <ol>
+            <li>
+                Minimum Path Sum
+                        <pre>
+DP 
+
+Test case
+1. one row 1 1 1
+2. one column
+3. others
+more than two paths
+1 1 1
+2 1 0
+
+f(i,j): min path from (0,0) to (i,j)
+f(i,j): min(f(i-1, j) + g[i,j], f(i, j-1) + g[i,j])
+separate first row and first col
+f(0,0) = g[0,0]
+f(0,j) = f(0, j-1) + g[0,j], j = 1 to numCol
+
+1. use a matrix to save min weight --> can be improvement
+2. two rows as extra memory
+separate first row
+if fist col, one way
+else two ways, choose min
+
+Points of attentions
+1. fist col/row, one way
+2. flag != flag does not work... (!= is relational operator)
+
+Refinement:
+use if (grid.empty() || grid[0].empty()) return 0;
+</pre>
+            </li>
+            <li> Word Break && Word Break II
+<pre>
+Word Break
+
+a. Recursively
+bool wordBreakable(string s, vector<string> &dict)
+dfs(int start, string s, vector<string> &dict)
+assume substr of before start is breakable
+if s[start to i] in dict, 
+    if dfs(i+1, s, dict) return true
+
+return false
+
+if start >= s.len
+return true;
+
+b. DP
+f(i): string 0 to i is breakable
+f(i): if any of them is true, f(j-1) && s[j to i] is in dict, j = 0 to i
+f(-1): true
+
+in reality dp[i] save f(i-1)
+
+for (int j = 0; j <= i; j++) {
+    if (s[j, i] in dict && dp[j] == true)
+    { dp[i+1] == true; break;}
+}
+
+Word Break II
+what to return if no such sentence?
+
+vector<vector<string> > wordBreak(string s, vector<string> &dict)
+
+a. dfs
+wordBreakSub(string s, int start, vector<string> &dict, vector<string> &path, vector<vector<string> > &res)
+if (start >= len) {
+    if breakable, push path
+}
+
+for j = start to len-1
+if (s[start to j] in dict) {
+push s[start to j] to path,
+dfs()
+path.pop()
+}
+
+b. Refine using Word Break DP result
+
+for j = start to len-1
+if (s[start to j] in dict && f(start-1)/dp[start]) {
+push s[start to j] to path,
+dfs(j+1)
+path.pop()
+}
+
+f(i): string i to len-1 is breakable
+f(i): if any of them is true, f(j) && s[i to j] is in dict, j = i to len-1
+f(len): true
+
+</pre>
+            </li>
+            <li> Reorder List
+<pre>
+Test cases
+1. empty list
+2. one element
+3. two elements
+1->2
+1<-2
+4. several elements
+
+ListNode* reorderList(ListNode *head)
+1. reverse the second part
+2. insert the second part into the first part
+1->2
+1->2->3
+1->2->3->4
+
+a. find out second part head
+if head == NULL || head->next == NULL, return NULL
+p1 = head
+p2 = head->next
+while(p2->next) {
+    p1 = p1->next;
+    p2 = p2->next->next;
+}
+p2 = p1->next; // second part to revert
+p1->next = NULL;
+
+b. insert the reversed second part into the first part (two pointers enough? No, need one more)
+1->2
+4->3
+
+while(p2) {
+    p2Next = p2->next;
+    p2->next = p1->next;
+    p1->next = p2;
+    p1 = p2->next;
+    p2 = p2Next;
+}
+
+c. reverse list 
+1->2->3
+while(cur)
+assume: pre->cur->next
+cur->next = pre;
+pre = cur;
+cur = next;
+if (next) {
+next = next->next
+}
+
+return pPre
+
+Points of attention
+1. break two lists before reversing the second part via "p1->next = NULL;"
+2. p2 = p2->next->next; may result in null p2 for p2->next judgement
+3. reverse list, return pPre (since pCur would be NULL)
+</pre>
+            </li>
+            <li> LRU Cache 
+<pre>
+Questions
+1. how to specify capacity? constructor
+2. time/space complexity? time: get and set both O(1), space O(n)
+3. key/value type? int
+4. in memory? yes
+5. definition of LRU? throw oldest last usage
+6. return value of moveToHead, addAsHead and removeTail? others choose void
+
+Test case
+1. capacity 0
+2. capacity 1
+3. capacity 2 or more
+
+Solution
+1. map?
+get: O(1)
+set: no info for LRU
+
+2. list
+get: O(n)
+set: O(n)
+LRU: when used, move to head
+Doubly linked list
+
+3. map+list
+get
+1. already existed
+a. update list, move to head
+b. return the value
+2. not found
+return -1
+
+set
+1. already existed
+a. update value, update list(move to head) moveToHead(ListNode *)
+2. not found
+a. has free space
+add to map and list (head) -> addAsHead(ListNode *)
+b. no free space
+remove oldest value from list and map -> removeTail()
+
+core classes
+struct ListNode {
+    int key
+    int value
+    ListNode *pre;
+    ListNode *next;
+}
+
+class DoublyList {
+public:
+    bool moveToHead(ListNode *);
+    bool addAsHead(ListNode *);
+    bool removeTail(ListNode *);
+private:
+    ListNode *head;
+}
+map<int, ListNode*> nodeMap;
+class LRUCache {
+public:
+    int get(int key);
+    void set(int key, int value);
+private:
+    map<int, ListNode*> nodeMap;
+}
+
+class relationship
+ListNode
+DoublyList has a set of ListNode's
+LRUCache has a DoublyList, a map, and other variables
+
+Refinement:
+set when no free space, just replace the last node (both list and map), and move it to head. But not much implementation difference.
+</pre>
+            </li>
+            <li>
+                Max Points on a Line
+<pre>
+int maxPoints(vector<Point> points)
+
+for each discovered line, count the number of points on it
+representation of line:
+y = k*x + b
+(x1, y1), (x2, y2) -> (y-y1)/(x-x1) = (y-y2)/(x-x2) -> (y-y1)(x-x2) = (y-y2)(x-x1)
+
+set<Line>
+for each pair<p1, p2>
+check if it's a new line?
+yes, count the number of points on the line
+no, next
+O(n^3)
+
+tiny trick, use map<Line, int> linePoints instead of set<Line>
+map<Line, int> linePointsUniq
+for each pair<p1, p2>
+check if it's a new line?
+yes, linePoints[Line] = p1.count+p2.count; linePointsUniq = 2
+no (one of the point must be counted already), linePoints[Line] += p1.count+p2.count, linePointsUniq += 1
+
+if it's k points on the same line, each point is counted by (k-1) times
+O(n^2)
+
+further refinement
+for each point, check other points with same slope and count
+map<Line, int> linePoints
+a. same point, count same, continue (init 1)
+b. different point, count++
+record line with max linePoints
+
+max linePoints+same is the best result for the current point
+
+Problems                                                                                                                            
+1. there are several same points, use map<Point, int> pointsAgg;
+2. linePointsUniq is incorrect, e.g. 3<1,1>, <2,2>, 2<3,3>
+first round will cover all the uniq points
+3. different lines counted together
+Both slope and y-intercept need to be consider for "<" operator of map when Line Object as a key
+4. same point is tricky e.g. [(0,0),(1,1),(0,0)]
+</pre>
+            </li>
+            <li> Construct Binary Tree from Inorder and Postorder Traversal
+<pre>
+Testcases
+1. empty tree
+2. one node
+1; 1
+3. left/right child only
+        1
+    2
+21, 21
+
+1
+    2
+        3
+123, 321
+4. normal
+
+        1
+    2       3
+4         5
+
+Inorder: 4 2 1 3 5
+Postorder: 4 2 5 3 1
+
+
+    1
+2       3
+      4
+    
+Inorder: 2 1 4 3
+Postorder: 2 4 3 1
+You may assume that duplicates do not exist in the tree
+
+Recursively
+TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder);
+TreeNode *buildTreeSub(vector<int> &inorder, vector<int> &postorder, int inorderStart, int postorderStart, int len)
+if len <= 0, return NULL
+rootValue = postorder[postorderStart + len - 1];
+find rootIndex in inorder
+inorderStartLeft = inorderStart
+LenLeft = rootIndex -  inorderStartLeft
+postorderStartLeft = postorderStart
+inorderStartRight = rootIndex + 1
+LenRight = len -  inorderLenLeft - 1
+postorderStartRight = postorderStart + LenLeft
+
+Problems:
+1. getIndex should begin with "start", index = start + i; compare v[start + i] with target
+2. getIndex forgot i++
+</pre>
+            </li>
+            <li> Convert Sorted List to Binary Search Tree
+<pre>
+Questions
+1. space/time complexity? space: O(c), time O(n)
+
+Testcases
+1. empty
+2. one node
+3. two nodes
+4. more nodes
+
+TreeNode *sortedListToBST(ListNode *head)
+
+1->2->3
+1->2->3->4
+
+TreeNode *sortedListToBST(ListNode *head, int len)
+recursively
+get root node
+leftLen, rightLen
+leftHead, rightHead
+
+leftLen = len>>1
+if (leftLen > 0) leftHead = head
+rightLen = len - leftLen - 1
+if (rightLen > 0) rightHead = rootNode->next;
+
+Refinement:
+if (rightLen > 0), if (leftLen > 0) is not necessary
+
+Problem:
+time is actually time O(nlgn), need better way for O(n)
+
+O(c) via bottom up building
+
+leftchild
+root
+rightchild
+
+mid = (start+end)>>1;
+left = sortedListToBSTSub(list, start, mid-1) //list will be changed to the next one of the last node
+root: mid (list->val)
+list=list->next;
+right = sortedListToBSTSub(list, start, mid-1)
+root->left = left
+root->right = right
+
+Refinement:
+mid = (start+end)>>1 => mid = start + ((end-start)>>1)
+</pre>
+            </li>
+            <li> Path Sum && Path Sum II
+<pre>
+Path Sum
+
+Test cases
+1. empty
+2. one node
+3. two nodes
+    1
+2
+
+3
+4. more nodes
+    1
+2       3
+
+4
+true/false
+
+Recursively
+
+bool pathSum(TreeNode *root, int target)
+0. NULL, false
+1. leaf, root->val == target
+2. pathSum(root->left, target - root->val) || pathSum(root->left, target - root->val)
+O(n)
+
+Path Sum II
+dfs
+vector<vector<int> > pathSum(TreeNode *root, int sum)
+dfs(TreeNode *root, int gap, vector<int> &path, vector<vector<int> > &res)
+1. root == NULL, return
+2. leaf, if (root->val == gap) save path, save result (path push pop can be combined to No.3)
+3. push root value to path
+dfs(root->left, gap-root->value, path, res)
+dfs(root->right, gap-root->value, path, res)
+path pop
+
+refinement combine two if's for leaf case
+</pre>
+            </li>
+            <li> Distinct Subsequences
+<pre>
+Testcases
+1. empty string
+2. not a subsequence
+ABC
+D
+3. several choices
+
+rabbbit
+rabbit
+
+DP
+s(i): s[0 to i]
+t(j): t[0 to j]
+f(i, j): Distinct Subsequences of t(j) in s(i)
+f(i, j) = 
+1. t[j] == s[i], f(i-1, j) + f(i-1, j-1)
+2. t[j] != s[i], f(i-1, j)
+
+m: matrix of f(i,j) value
+store f(i, j) to m[i+1,j+1]
+first col 1, first row 0
+
+further refinement, two rows would be enough
+
+Problem: first col be 1: m[0][0] = 1; m[1][0] = 1;
+
+One row solution, combine two conditions
+f(i, j) = f(i-1, j) + (t[j] == s[i])*f(i-1, j-1)
+by looking at j instead of i
+j value = pre i j value + () * (pre i, pre j value)
+
+Problem: the first one should not be reused, change the direction of j to (lenT-1 to 0)
+</pre>
+            </li>
+            <li> Pascal's Triangle && Pascal's Triangle (II)
+<pre>
+Test cases
+1. 0
+2. 1
+3. 2
+4. 3
+
+vector<vector<int> >pascalTriangle(int numRows)
+i from 0 to numRows-1
+first col 1
+j from 1 to i - 1
+v[j] = vPre[j] + vPre[j-1]
+last col 1
+
+Pascal's Triangle II 
+Use same method as Pascal's Triangle but use vPre, and need to update vPre
+
+Problem:
+avoid vector clear operation, allocate enough memory first. vector<int> vPre(rowIndex + 1); vector<int> vCur(rowIndex + 1);
+
+O(k) memory
+(n,0), (n,1),....,(n,n)
+(n,j) = (n, j-1) * (n-j+1) / j, j from 1 to n
+
+Problem:
+1. may have overflow. do division first
+2. may cause problem for division first (e.g. 2/3*3), type cast (to double)
+</pre>
+            </li>
+            <li> Best Time to Buy and Sell Stock (I, II, III)
+<pre>
+Best Time to Buy and Sell Stock
+
+Naive method
+check all pairs pair(i,j) j>i, find max(p[j] - p[i])
+O(n^2)
+
+DP
+f(i) = max profit for p[0 to i]
+f(i-1) = max profit for p[0 to i-1], bestPair <m,n>
+f(i) = 
+if (p[i] > p[n]), p[i] - p[m], bestPair <m, i>
+else 
+max(f(i-1), p[i] - p[j]), j = n+1 to i-1, if > f(i-1), update bestPair as well
+
+Still O(n^2) with less constant factor
+Problem
+1. it's not correct, e.g. 1,5,0,6; need to check p[i] - p[j]) (j = n+1 to i-1) no matter what
+
+find min value index and max value index, if indexMin < indexMax found answer
+else 
+
+Sort?
+
+Best Time to Buy and Sell Stock II 
+</pre>
+            </li>
+            <li> Binary Tree Maximum Path Sum
+<pre>
+int pathSum(TreeNode *root)
+
+recursively
+int dfs(TreeNode *root, int &maxRoot)
+maxRoot: max sum of path starting from root
+root == NULL, maxSum = 0
+leaf, maxRoot = maxSum = root->val
+leftMax = dfs(root->left, leftMaxRoot)
+leftMaxRoot
+rightMax = dfs(root->right, rightMaxRoot)
+rightMaxRoot
+
+maxRoot = max(leftMaxRoot + root->val, rightMaxRoot + root->val, root->val)
+maxSum = max(leftMax, rightMax, maxRoot, leftMaxRoot + root->val + rightMaxRoot)
+
+Problem:
+1. overflow, leftMaxRoot + root->val + rightMaxRoot when left or right child is NULL and root is minus -> add one more judgement "if (root->left && root->right)"
+
+Refinement:
+rootSum, maxSum
+rootSum: sum starting from root
+maxSum: maxSum found so far
+void dfs(TreeNode *root, int &rootSum, int &maxSum)
+root == NULL, rootSum = 0, return
+rootSumLeft = 0, rootSumRight = 0
+dfs(root->left, rootSumLeft, maxSum)
+dfs(root->right, rootSumRight, maxSum)
+rootSum = max(rootSumLeft + root->val, rootSumRight + root->val, root->val);
+maxSum = max(maxSum, rootSum, rootSumLeft + root->val + rootSumRight);
+</pre>
+            </li>
+            <li> Best Time to Buy and Sell Stock I && II && III
+<pre>
+Best Time to Buy and Sell Stock 
+
+int maxProfit(vector<int> prices)
+
+f(i): maxProfit given prices[0 to i]
+f(i): max(prices[i] - min, f(i-1))
+
+need to keep min
+minValue = min(minValue, prices[i])
+
+Best Time to Buy and Sell Stock II
+By stock whenever is profitable
+for each consecutive pair, add it to maxProfit if positive
+maxProfit += (prices[i] > prices[i-1]) * (prices[i] - prices[i-1])
+
+Best Time to Buy and Sell Stock III
+the problem is identical to 
+find a best split such that maximize sum of the maxProfit of the first part and second part
+like the first problem, we can know maxProfit given prices[0 to i]
+then treat it backward, we can know maxProfit given prices[i to len-1]
+g(i): maxProfit given prices[i to len-1]
+g(i): max(maxValue - prices[i], g(i+1))
+need to keep maxValue
+
+for each i, find max(f(i) + g(i))
+</pre>
+            </li>
+            <li>  how to scale up a system
+<pre>
+Questions
+1. what to scale up? traffic, content pool
+
+
+FE/Serving
+
+Backend
+
+Serving
+single server capacity
+what's the bottleneck
+1. memory: compress, hardware upgrade
+2. cpu: serving logic optimization, hardware upgrade (more cores)
+
+scale up to more servers
+a. vip
+
+Backend
+single server
+
+via multiple server
+partition
+</pre>
+            </li>
+        </ol>
+    </body>
+</html>
+

@@ -1,0 +1,25 @@
+<!DOCUMENTTYPE HTML>
+<html>
+	<head>
+		<title>Aug 6th, 2013</title>
+	</head>
+	<body>
+		<ul>
+				Cracking the coding interview - 2.7 list palindrome: DONE
+				<ul>
+					Points of attention
+					<li>
+						determine list length odd or even w/o count: possible via two pointers</li>
+					<li>
+						adjust p2 before revert the 1st half of the list</li>
+					<li>
+						revert list via two assistant pointers: not possible</li>
+				</ul>
+			</li>
+			<li>
+				leetcode - Minimum Window Substring: NOT able to figure it out
+			</li>
+		</ul>
+	</body>
+</html>
+

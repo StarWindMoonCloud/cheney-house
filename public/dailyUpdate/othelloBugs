@@ -1,0 +1,30 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Othello Bugs</title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				revert pieces between: not happened to all cases --&gt; Do not break after reverting one pair DONE</li>
+			<li>
+				After one game, player changed from black to white, the first step of black does not behave correctly (Reported by brother 10042013) FIXED</li>
+			<li>
+				Hard mode: Uncaught TypeError: Cannot set property &#39;undefined&#39; of undefined FIXED (if (depth == 0 || !stepAvailablePlayer(player)) return evaluate(board);)</li>
+			<li>
+				invalid step is returned</li>
+			<li>
+				score as expected?
+				<ul>
+					<li>
+						copy back need to happen inside for loop (placeStep-&gt;computeScore-&gt;copyBack), before each computeScore, board needs to be recovered</li>
+				</ul>
+			</li>
+			<li>
+				Smart enough?</li>
+			<li>
+				Memory are not freed (after return) FIXED</li>
+		</ul>
+	</body>
+</html>
+

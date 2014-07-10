@@ -1,0 +1,78 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 7-8th, 2013</title>
+	</head>
+	<body>
+		<p>
+			<b>Othello</b></p>
+		<ul>
+			<li>
+				Framework
+				<pre>
+UI:
+Control buttons
+Table
+
+Actions:
+Start game
+Exit game
+Draw table
+Listen to click
+Place a piece</pre>
+			</li>
+			<li>
+				Implementation detail
+				<pre>
+when a click happened 
+count 0,1
+
+count 0: black
+count 1: white
+
+already placed: no response 
+empty: 
+i. valid 
+a. place white/black
+b. apply flip
+c. determine if game over
+ii. invalid
+no response
+
+class 
+Board
+init:
+-1: empty
+
+0: black
+1: white
+
+count: whose turn
+
+isValid() // according to count and board status
+{
+check all the existing same color pieces
+a. distance &gt; 1 (|x| + |y|)
+b. same row/column, diagonal 
+c. all other color pieces between
+1. distance, same row/column or diagonal. 
+2. all between pieces are white --&gt; return true; ow continue
+
+}
+</pre>
+			</li>
+			<li>
+				Points of attention
+				<ul>
+					<li>
+						between: not inclusive</li>
+					<li>
+						diagonal: distance should be greater than 2</li>
+					<li>
+						revert piece should happen for every valid pair</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+

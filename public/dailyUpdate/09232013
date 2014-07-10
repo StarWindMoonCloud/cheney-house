@@ -1,0 +1,52 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Sep 23, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				leetcode question and review
+				<ul>
+					<li>
+						Pow(x, n)
+						<pre>
+Testing:
+x: 0, positive, negative
+n: positive, negative, 0
+
+Pow(x, n)
+nAbs
+
+naive method (running time: Time Limit Exceeded)
+1. nAbs
+2. x*x*x...
+3. if n<0 1/res
+
+How to reduce computation: reduce the number of multiplications (running time: )
+x^n
+1. n even
+y=x^(n>>1), y*y
+
+2. n odd
+y=x^(n>>1), y*y*x
+
+n==1, return x
+
+Further reduce computation: DP (running time: )
+x, x^2, x^4, x^8
+how to reach x^n?
+
+Points of attention:
+abs may overflow (big minus number) -> use unsigned int for abs of int
+
+TO THINK
+How to solve it vis DP?
+</pre>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+

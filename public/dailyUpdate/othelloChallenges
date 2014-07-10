@@ -1,0 +1,16 @@
+<!DOCUMENTTYPE html>
+<html>
+        <head>
+                <title>Othello Challenges</title>
+        </head>
+        <body>
+                <ul>
+                        <li>
+                                how to fix the wait time of each step (step searching + waiting time)</li>
+                        <li>
+                                Multi-player</li>
+                        <li>
+                                How to be smarter</li>
+                </ul>
+                </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCUMENTTYPE html>
+<html>
+	<head>
+		<title>Nov 02, 2013</title>
+	</head>
+	<body>
+		<ol>
+			<li>
+				Leetcode question
+				<ul>
+					<li>  Merge Sorted Array 
+						<pre>
+Merge Sorted Array
+
+Test case
+1. one empty [1; 2], []; [] [1; 2]
+2. two empty
+3. normal
+a. 
+[2; 4]
+[1; 3]
+
+[2; 4]
+[3]
+
+two pointers
+1. shift elements in a by n
+2. i, j, k
+compare A[j], B[k], put the large one into A[i]
+3. while(j < m + n && k < n)
+
+Points of attention
+1. Do not forget the rest of the array
+
+How to refine
+from backward to forward:
+1. do not need to copy the rest of the array
+2. use less vairables, more clean
+</pre>
+					</li>   
+				</ul>
+			</li>
+		</ol>
+	</body>
+</html>
+
