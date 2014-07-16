@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html{
+        background:#000000;
+        position:relative;
+        height:100%; /* force the BODY element to match the height of the HTML element */
+        width: 100%
+        }
+        body{
+        background:#000000;
+        height:100%; /* force the BODY element to match the height of the HTML element */
+        width: 100%
+        }
+
+        #stars{background: #000000; height: 100%; width: 100%;}
+        .star{position: relative;}
+    </style>
+
+</head>
+<body>
+<div id='stars'></div>
+
+<script Language="JavaScript">
+
+// setup
+//var width = screen.width;
+//var height = screen.height;
+var width = 100; // use relative values
+var height = 100;
+var num_stars = 350;
+var percentage_spark = 0.33 // percentage of stars to spark at a time
+var max_star_width = 1.5; // absolute
+var colors = new Array("#FFFFFF","#EEDD88","#DDCC77","#FFEE99","#EEEEFF","#DDDDEE","#CCCCDD","#BBBBCC","#CCBB66","#FFAA88","#EE9977","#DD8866","#CC7755");
+var stars = new Array;
+
+for (i = 0; i < num_stars ; i++)
+{
+	star = new Object;
+	//star.x = Math.floor(Math.random()*(width - 1)) + 1;
+	//star.y = Math.floor(Math.random()*(height - 1)) + 1;
+    star.x = Math.floor(Math.random()*width);
+	star.y = Math.floor(Math.random()*height);
+	star.width = Math.random()*max_star_width;
+	star.height = star.width;
+	star.color = colors[Math.floor(Math.random()*(12))];
+	//star.string = '<div id="'+i+'" class="star" style="left:'+star.x+'px;top:'+star.y+'px; width:'+star.width+'px; height:'+star.height+'px; background:'+star.color+'"></div>';
+	star.string = '<div id="'+i+'" class="star" style="left:'+star.x+'%;top:'+star.y+'%; width:'+star.width+'px; height:'+star.height+'px; background:'+star.color+'"></div>';
+	stars[i] = star;
+	document.getElementById('stars').innerHTML += star.string;
+	console.log(star.string)
+}
+//document.getElementById('stars').innerHTML += star.string;
+//spark();
+
+// spark
+function spark()
+{
+    console.log("spark called");
+	var pick;
+	for (i = 0; i < percentage_spark * num_stars ; i++)
+	{
+		pick = Math.floor(Math.random()*(stars.length - 1));
+		console.log("pick:" + pick);
+		// console.log('BEFORE', stars[pick]);
+		color = colors[Math.floor(Math.random()*(12))];
+		string = stars[pick].string;
+		// update array
+		old_color = stars[pick].color;
+		string = string.replace('background:'+old_color, 'background:'+color);
+		stars[pick].string = string;
+		stars[pick].color = color;
+
+		star = document.getElementById(pick);
+		star.style.backgroundColor = color;
+
+	}
+
+}
+
+//window.setInterval("spark()",100);
+setInterval("spark();", 100);
+</script>
+</body>
+</html>
