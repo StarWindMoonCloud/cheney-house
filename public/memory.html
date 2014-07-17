@@ -17,11 +17,25 @@
         #stars{background: #000000; height: 100%; width: 100%;}
         .star{position: relative;}
     </style>
-
+    <script src="memory/jssor.slider.min.js"></script>
+    <script>
+    jssor_slider1_starter = function (containerId) {
+        var options = { $AutoPlay: true };
+        var jssor_slider1 = new $JssorSlider$(containerId, options);
+    };
+    </script>
 </head>
 <body>
 <div id='stars'></div>
-
+<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
+    <!-- Slides Container -->
+    <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
+        <div><img u="image" src="IMG_0140.JPG" /></div>
+        <div><img u="image" src="doujiaoPaigu.JPG" /></div>
+    </div>
+    <!-- Trigger -->
+    <script Language="JavaScript">jssor_slider1_starter('slider1_container');</script>
+</div>
 <script Language="JavaScript">
 
 // setup
@@ -49,7 +63,6 @@ for (i = 0; i < num_stars ; i++)
 	star.string = '<div id="'+i+'" class="star" style="left:'+star.x+'%;top:'+star.y+'%; width:'+star.width+'px; height:'+star.height+'px; background:'+star.color+'"></div>';
 	stars[i] = star;
 	document.getElementById('stars').innerHTML += star.string;
-	console.log(star.string)
 }
 //document.getElementById('stars').innerHTML += star.string;
 //spark();
@@ -57,13 +70,10 @@ for (i = 0; i < num_stars ; i++)
 // spark
 function spark()
 {
-    console.log("spark called");
 	var pick;
 	for (i = 0; i < percentage_spark * num_stars ; i++)
 	{
 		pick = Math.floor(Math.random()*(stars.length - 1));
-		console.log("pick:" + pick);
-		// console.log('BEFORE', stars[pick]);
 		color = colors[Math.floor(Math.random()*(12))];
 		string = stars[pick].string;
 		// update array
