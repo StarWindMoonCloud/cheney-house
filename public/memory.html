@@ -16,26 +16,33 @@
 
         #stars{background: #000000; height: 100%; width: 100%;}
         .star{position: relative;}
+
+        .img{position: relative; height: 100%; width:80%}
     </style>
-    <script src="memory/jssor.slider.min.js"></script>
-    <script>
-    jssor_slider1_starter = function (containerId) {
-        var options = { $AutoPlay: true };
-        var jssor_slider1 = new $JssorSlider$(containerId, options);
-    };
-    </script>
 </head>
 <body>
 <div id='stars'></div>
-<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
-    <!-- Slides Container -->
-    <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
-        <div><img u="image" src="IMG_0140.JPG" /></div>
-        <div><img u="image" src="doujiaoPaigu.JPG" /></div>
-    </div>
-    <!-- Trigger -->
-    <script Language="JavaScript">jssor_slider1_starter('slider1_container');</script>
-</div>
+<div id="slides"></div>
+<script>
+
+    var slides = document.getElementById("slides");
+    var imgs = ["IMG_0140.JPG", "doujiaoPaigu.JPG"];
+    var indexCur = 0;
+
+    function rotate()
+    {
+    var imgStr = "";
+    imgStr += '<img src="' + imgs[indexCur] + '">';
+    console.log(imgStr);
+    document.getElementById('slides').innerHTML = imgStr;
+    indexCur++;
+    if (indexCur >= imgs.length) {
+        indexCur = 0;
+    }
+    }
+
+    setInterval("rotate();", 1500);
+</script>
 <script Language="JavaScript">
 
 // setup
@@ -91,6 +98,7 @@ function spark()
 
 //window.setInterval("spark()",100);
 setInterval("spark();", 100);
+
 </script>
 </body>
 </html>
