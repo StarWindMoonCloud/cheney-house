@@ -14,30 +14,56 @@
         width: 100%
         }
 
+        #slides li
+        {
+        display: inline;
+        list-style-type: none;
+        padding-bottom: 2%;
+        padding-left: 5%;
+        }
+
         #stars{background: #000000; height: 100%; width: 100%;}
         .star{position: relative;}
 
-        .img{position: relative; height: 100%; width:80%}
+        .img{position: relative; height: 25%; width:25%}
     </style>
 </head>
 <body>
 <div id='stars'></div>
-<div id="slides"></div>
+<ul id="slides">
+    <li id="slide0"><img class="img" src="img/travel/t1.JPG"></li>
+    <li id="slide1"><img class="img" src="img/cook/c1.JPG"></li>
+    <li id="slide2"><img class="img" src="img/love/l1.JPG"></li>
+</ul>
 <script>
 
     var slides = document.getElementById("slides");
-    var imgs = ["IMG_0140.JPG", "doujiaoPaigu.JPG"];
-    var indexCur = 0;
-
+    var imgTSize = 5;
+    var imgCSize = 5;
+    var imgLSize = 5;
+    var indexTCur = 1;
+    var indexCCur = 1;
+    var indexLCur = 1;
     function rotate()
     {
-    var imgStr = "";
-    imgStr += '<img src="' + imgs[indexCur] + '">';
-    console.log(imgStr);
-    document.getElementById('slides').innerHTML = imgStr;
-    indexCur++;
-    if (indexCur >= imgs.length) {
-        indexCur = 0;
+    var imgStrT = "";
+    var imgStrC = "";
+    var imgStrL = "";
+    imgStrT += '<img class="img" src="' + "img/travel/t" + indexTCur + '.JPG">';
+    imgStrC += '<img class="img" src="' + "img/cook/c" + indexTCur + '.JPG">';
+    imgStrL += '<img class="img" src="' + "img/love/l" + indexTCur + '.JPG">';
+    document.getElementById('slide0').innerHTML = imgStrT;
+    document.getElementById('slide1').innerHTML = imgStrC;
+    document.getElementById('slide2').innerHTML = imgStrL;
+    indexTCur++, indexCCur++, indexLCur++;
+    if (indexTCur > imgTSize) {
+        indexTCur = 1;
+    }
+    if (indexCCur > imgCSize) {
+        indexCCur = 1;
+    }
+    if (indexLCur > imgLSize) {
+        indexLCur = 1;
     }
     }
 
