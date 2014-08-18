@@ -31,43 +31,43 @@
 <body>
 <div id='stars'></div>
 <ul id="slides">
-    <li id="slide0"><img class="img" src="img/travel/t1.JPG"></li>
+    <li id="slide0" onclick="slideShow('travel',1,5)"><img class="img" src="img/travel/t1.JPG"></li>
     <li id="slide1"><img class="img" src="img/cook/c1.JPG"></li>
     <li id="slide2"><img class="img" src="img/love/l1.JPG"></li>
 </ul>
 <script>
 
     var slides = document.getElementById("slides");
-    var imgTSize = 5;
-    var imgCSize = 5;
-    var imgLSize = 5;
-    var indexTCur = 1;
-    var indexCCur = 1;
-    var indexLCur = 1;
-    function rotate()
-    {
-    var imgStrT = "";
-    var imgStrC = "";
-    var imgStrL = "";
-    imgStrT += '<img class="img" src="' + "img/travel/t" + indexTCur + '.JPG">';
-    imgStrC += '<img class="img" src="' + "img/cook/c" + indexTCur + '.JPG">';
-    imgStrL += '<img class="img" src="' + "img/love/l" + indexTCur + '.JPG">';
-    document.getElementById('slide0').innerHTML = imgStrT;
-    document.getElementById('slide1').innerHTML = imgStrC;
-    document.getElementById('slide2').innerHTML = imgStrL;
-    indexTCur++, indexCCur++, indexLCur++;
-    if (indexTCur > imgTSize) {
-        indexTCur = 1;
-    }
-    if (indexCCur > imgCSize) {
-        indexCCur = 1;
-    }
-    if (indexLCur > imgLSize) {
-        indexLCur = 1;
-    }
+    var imgSize = 5;
+    var slideMap = {
+        "travel": "slide0",
+        "cook": "slide1",
+        "love": "slide2"
+    };
+
+    function slideShow(type, indexCur, size) {
+        console.log("indexCur: " + indexCur);
+        var imgStr = "";
+        imgStr += '<img class="img" src="' + "img/" + type + "/" + type.charAt(0) + indexCur + '.JPG">';
+        document.getElementById(slideMap[type]).innerHTML = imgStr;
+        indexCur++;
+        if(indexCur <= size) {
+            setTimeout(function() {
+                slideShow(type, indexCur, size);
+                 }, 2000);
+            }
+        }
+
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds) {
+                break;
+            }
+        }
     }
 
-    setInterval("rotate();", 1500);
+    //setInterval("rotate();", 1500);
 </script>
 <script Language="JavaScript">
 
