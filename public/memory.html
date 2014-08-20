@@ -32,8 +32,8 @@
 <div id='stars'></div>
 <ul id="slides">
     <li id="slide0" onclick="slideShow('travel',1,5)"><img class="img" src="img/travel/t1.JPG"></li>
-    <li id="slide1"><img class="img" src="img/cook/c1.JPG"></li>
-    <li id="slide2"><img class="img" src="img/love/l1.JPG"></li>
+    <li id="slide1" onclick="slideShow('cook',1,5)"><img class="img" src="img/cook/c1.JPG"></li>
+    <li id="slide2" onclick="slideShow('love',1,5)"><img class="img" src="img/love/l1.JPG"></li>
 </ul>
 <script>
 
@@ -51,21 +51,41 @@
         imgStr += '<img class="img" src="' + "img/" + type + "/" + type.charAt(0) + indexCur + '.JPG">';
         document.getElementById(slideMap[type]).innerHTML = imgStr;
         indexCur++;
+        fade(slideMap[type], 0.1, 1, 750, new Date().getTime());
+        //setTimeout(fade(slideMap[type], 1, 0, 3000, new Date().getTime()), 3000);
+        setTimeout(function() {
+        fade(slideMap[type], 1, 0, 750, new Date().getTime());
+        }, 750);
         if(indexCur <= size) {
             setTimeout(function() {
                 slideShow(type, indexCur, size);
-                 }, 2000);
+                 }, 1500);
             }
         }
 
-    function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds) {
-                break;
-            }
-        }
+function fade(eid, initOp, finalOp, TimeToFade, time)
+{
+    if (initOp==0)
+    {
+        document.getElementById(eid).style.visibility="visible";
     }
+    var curTick = new Date().getTime();
+    var elapsedTicks = curTick - time;
+    var newOp = initOp+(finalOp-initOp)*elapsedTicks/TimeToFade;
+    if (Math.abs(newOp-initOp)>Math.abs(finalOp-initOp))
+    {
+        document.getElementById(eid).style.opacity=finalOp;
+        /*
+        if (finalOp==0)
+        {
+            document.getElementById(eid).style.visibility="hidden"
+        }*/
+        return;
+    }
+    console.log(newOp);
+    document.getElementById(eid).style.opacity=newOp;
+    setTimeout("fade( '" + eid + "'," + initOp + "," + finalOp + "," + TimeToFade + "," + time + ")", TimeToFade/1000);
+}
 
     //setInterval("rotate();", 1500);
 </script>
