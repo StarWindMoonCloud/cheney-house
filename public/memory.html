@@ -29,6 +29,9 @@
     </style>
 </head>
 <body>
+<audio autoplay loop>
+    <source src="audio/thanksToLove.mp3">
+</audio>
 <div id='stars'></div>
 <ul id="slides">
     <li id="slide0" onclick="slideShow('travel',1,5)"><img class="img" src="img/travel/t1.JPG"></li>
@@ -51,15 +54,15 @@
         imgStr += '<img class="img" src="' + "img/" + type + "/" + type.charAt(0) + indexCur + '.JPG">';
         document.getElementById(slideMap[type]).innerHTML = imgStr;
         indexCur++;
-        fade(slideMap[type], 0.1, 1, 750, new Date().getTime());
+        fade(slideMap[type], 0.1, 1, 3000, new Date().getTime());
         //setTimeout(fade(slideMap[type], 1, 0, 3000, new Date().getTime()), 3000);
         setTimeout(function() {
-        fade(slideMap[type], 1, 0, 750, new Date().getTime());
-        }, 750);
+        fade(slideMap[type], 1, 0.1, 3000, new Date().getTime());
+        }, 3000);
         if(indexCur <= size) {
             setTimeout(function() {
                 slideShow(type, indexCur, size);
-                 }, 1500);
+                 }, 6000);
             }
         }
 
