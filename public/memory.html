@@ -14,29 +14,35 @@
         width: 100%
         }
 
+        ul {
+        margin-top: 5%;
+        }
         #slides li
         {
         display: inline;
         list-style-type: none;
-        padding-bottom: 2%;
-        padding-left: 5%;
+        padding-left: 20%;
         }
 
-        #stars{background: #000000; height: 100%; width: 100%;}
-        .star{position: relative;}
+        .star{position: absolute;}
 
-        .img{position: relative; height: 25%; width:25%}
+        .img{position: relative; height: 50%; width:50%}
+
+        video {
+        padding-left: 18%;
+        padding-top: 10%
+        }
     </style>
 </head>
 <body>
-<audio autoplay loop>
-    <source src="audio/thanksToLove.mp3">
-</audio>
+<video width="660px" controls>
+    <source src="video/memory.mp4" type="video/mp4">
+</video>
+
 <div id='stars'></div>
+<!--
 <ul id="slides">
     <li id="slide0" onclick="slideShow('travel',1,5)"><img class="img" src="img/travel/t1.JPG"></li>
-    <li id="slide1" onclick="slideShow('cook',1,5)"><img class="img" src="img/cook/c1.JPG"></li>
-    <li id="slide2" onclick="slideShow('love',1,5)"><img class="img" src="img/love/l1.JPG"></li>
 </ul>
 <script>
 
@@ -92,6 +98,7 @@ function fade(eid, initOp, finalOp, TimeToFade, time)
 
     //setInterval("rotate();", 1500);
 </script>
+-->
 <script Language="JavaScript">
 
 // setup
