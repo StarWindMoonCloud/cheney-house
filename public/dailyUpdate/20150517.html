@@ -1,0 +1,57 @@
+<!DOCUMENTTYPE html>
+<html>
+<head>
+    <title>May 17, 2015</title>
+</head>
+<body>
+<ol>
+    <li>
+        Add and Search Word - Data structure design
+						<pre>
+Problem solving methodology
+Start with (key) questions
+Write down test cases
+Solution part
+Giving out my thinking
+Write down general steps
+Start from naive solution
+How to optimize time and space?
+Code according to the above framework
+Manually testing, error correction and enhancement
+
+9:00am - 9:30
+Add and Search Word
+
+Questions
+1. how to store the words
+2. how to support search with pattern
+3. java public class, default scope of member, constructor, uninitialized map value, get class value, empty subStr?
+4. match dot, how to advance? recursively
+
+Test cases
+1. empty word
+2. no match
+3. with nondot pattern match
+4. with doc pattern match
+
+Solution
+1. naive method
+put all words into set, search is traversal. Time: add O(1); search O(n); Space O(n)
+2. via tree
+
+Point of attentions
+1. internal class variable as function parameter is not a good idea
+2. init trie not with null map, but empty one. Cause reference assign may loss connection
+3. root do not advance pattern word
+
+Key points
+1. add: match via map, set lastNode's isEnd
+2. search: match and advance via map, check via node's isEnd
+
+Refinement
+</pre>
+    <li>
+</ol>
+</body>
+</html>
+
