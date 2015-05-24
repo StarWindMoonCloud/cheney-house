@@ -1,0 +1,58 @@
+<!DOCUMENTTYPE html>
+<html>
+<head>
+    <title>May 20, 2015</title>
+</head>
+<body>
+<ol>
+    <li>
+        Surrounded Regions
+						<pre>
+Problem solving methodology
+Start with (key) questions
+Write down test cases
+Solution part
+Giving out my thinking
+Write down general steps
+Start from naive solution
+How to optimize time and space?
+Code according to the above framework
+Manually testing, error correction and enhancement
+
+09:55pm - 10:25
+
+Questions
+
+Test cases
+1. empty
+2. one row
+3. no surrouneded case
+4. with no surrouneded case
+5. all 'X' and all 'O'
+
+Solution
+1. naive method
+For each '0', check if it's surrounded, if so, change.
+Time: O(mn(m+n)), space: O(c)
+2.
+a. found connected areas and marked with island number
+b. for each area, check if all item is surrounded
+if so, it should be captured
+3. edge is crucial, check boundaries
+a. all 'X', kill all '0'
+b. for any '0', expand, and mark safe
+c. go through and kill those are not marked safe
+
+Point of attentions
+1. two dimension matrix, use length
+2. stack overflow
+
+Key points
+
+Refinement
+</pre>
+    <li>
+</ol>
+</body>
+</html>
+

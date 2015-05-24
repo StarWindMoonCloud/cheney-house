@@ -1,0 +1,67 @@
+<!DOCUMENTTYPE html>
+<html>
+<head>
+    <title>May 22, 2015</title>
+</head>
+<body>
+<ol>
+    <li>
+        Candy
+						<pre>
+Problem solving methodology
+Start with (key) questions
+Write down test cases
+Solution part
+Giving out my thinking
+Write down general steps
+Start from naive solution
+How to optimize time and space?
+Code according to the above framework
+Manually testing, error correction and enhancement
+
+09:05pm - 09:35
+
+Questions
+1. java int[]: can the size be zero? Yes, new int[0]; can not be negative, will throw exception
+2. array[]: definition as class?
+like primitive, no definition found: http://stackoverflow.com/questions/11573128/members-of-java-array-class
+3. arraylist: size vs capacity, different values
+4. same ratings must be same num of candies? No
+
+Test cases
+1. empty
+2. all same ratings
+3. various ratings
+4. two min's
+
+Solution
+1. naive method
+starting with min,
+for each neighbor, if it's greater than min, more candy, ow, same candies
+2. solution 1 is not correct, counter example: [1,2,4,4,3]
+use valley/rising/descending
+a. if valley, 1
+b. if rising, prev candy + 1
+c. descending: reverse and check
+3. solution 2 is not correct, counter example: [4,2,3,4,1]
+aa. sort (together with ranking)
+a. starting with the current lowest rating
+b. if neighbors are not assigned, assign it to 1, else go to c
+c. compare with assigned neighbors
+i. if equal to any of them: max(neighbors)
+ii. if greater than all: max(neighbors)+1
+
+Point of attentions
+1. Need to be careful about each conversion
+2. stack overflow??
+3. do not overwrite original array
+
+Key points
+
+Refinement
+</pre>
+    <li>
+</ol>
+</body>
+</html>
+
