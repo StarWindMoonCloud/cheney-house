@@ -1,0 +1,65 @@
+<!DOCUMENTTYPE html>
+<html>
+<head>
+    <title>May 26, 2015</title>
+</head>
+<body>
+<ol>
+    <li>
+        Design a recommendation system
+						<pre>
+Problem solving methodology
+Start with (key) questions
+Write down test cases
+Solution part
+Giving out my thinking
+Write down general steps
+Start from naive solution
+How to optimize time and space?
+Code according to the above framework
+Manually testing, error correction and enhancement
+
+10:15am - 10:45am
+
+Key questions
+1. how many users do we have? 1M
+2. content pool size? 1M
+3. freshness requirement? 5 minutes
+
+My research questions
+1. can content be stored in sherpa, can user profile be stored in HBase?
+content can not be stored in sherpa: e.g. filtering
+<a href="http://stackoverflow.com/questions/3046001/what-does-document-oriented-vs-key-value-mean-when-talking-about-mongodb-vs-c">What does “Document-oriented” vs. Key-Value mean when talking about MongoDB vs Cassandra?</a>
+<a href="http://en.wikipedia.org/wiki/Document-oriented_database">Document-oriented database</a>
+<a href="http://www.couchbase.com/nosql-resources/what-is-no-sql">Why NoSQL?</a>
+<a href="http://bigdataconsultants.blogspot.com/2013/12/difference-between-sharding-partitioning.html">Difference between Sharding & Partitioning</a>
+2. for each component/section, what's the goal/requirements, what are the choices, advantages/disadvantages, decision?
+3. difference between partition and shading
+4. sherpa, hbase comparison (all others) with more accurate number
+
+User cases:
+1. input user, output interested documents
+2. input documents & user, output related/interested documents
+3. input document, output related documents
+4. user declared interested
+
+Functions:
+
+
+Solution
+1. solution with Yahoo technologies
+<embed src="../img/learning/recommendationSystem.pdf" width=320px height=240px>
+2. solution with non Yahoo technologies
+
+
+Point of attentions
+
+Key points
+
+Refinement
+</pre>
+    <li>
+</ol>
+</body>
+</html>
+
