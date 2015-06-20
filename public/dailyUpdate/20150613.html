@@ -1,0 +1,82 @@
+<!DOCUMENTTYPE html>
+<html>
+<head>
+    <title>June 13, 2015</title>
+</head>
+<body>
+<ol>
+    <li>
+        Max Points on a Line
+						<pre>
+Problem solving methodology
+Start with (key) questions
+Write down test cases
+Solution part
+Giving out my thinking
+Write down general steps
+Start from naive solution
+How to optimize time and space?
+Code according to the above framework
+Manually testing, error correction and enhancement
+
+9:35am - 10:05am
+
+Questions
+1. array length, size, length or length()? length
+2. Line(int a, int b) {this.a = a; this.b = b;} ==> Line(int a, int b) {a = a; b = b;}?
+3. java object hashcode/equal? http://tutorials.jenkov.com/java-collections/hashcode-equals.html
+
+Test cases:
+1. one/zero point
+2. two points, all points same line
+3. others
+
+
+
+Solution
+1. naive method
+                            a. for each pair, add the count
+                            b. compute value
+                            c. Time: O(n^2), Space: O(n)
+
+2. more gracefully
+                            a. uniq points: O(n)
+                            b. lines with points: O(n^2)
+
+
+Point of attentions
+1. map member has to be object
+2. map containsKey!
+3. map transversal
+        for (Map.Entry<Line, Integer> entry : countMap.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+            }
+        }
+4. define equals (override and check details)
+    public boolean equals(Object l) {
+        if (this == l) {
+            return true;
+        }
+        if (l == null) {
+            return false;
+        }
+        if (getClass() != l.getClass()) {
+            return false;
+        }
+        Line lineOther = (Line) l;
+        return this.a == lineOther.a && this.b == lineOther.b;
+    }
+5. same point twice?
+6. 10 duplicated points
+7. precision lost from int to double (e.g. slope)
+
+Key points
+
+Refinement
+</pre>
+    <li>
+</ol>
+</body>
+</html>
+
